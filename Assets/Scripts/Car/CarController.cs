@@ -5,6 +5,8 @@ public class CarController : MonoBehaviour
 {
     [SerializeField] private float _speed = 20f;
 
+    public float GetSpeed => _speed;
+
     private Rigidbody2D _rb;
 
     private void Awake()
@@ -20,7 +22,9 @@ public class CarController : MonoBehaviour
 
     private void Move()
     {
-        Vector2 direction = transform.right;
-        _rb.MovePosition(_rb.position + direction * _speed * Time.fixedDeltaTime);
+        Vector2 direction = new Vector2(transform.right.x, 0f);
+        _rb.linearVelocity = direction * _speed + new Vector2(0f, _rb.linearVelocity.y);
     }
+
+
 }
