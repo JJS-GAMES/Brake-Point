@@ -4,7 +4,7 @@ using UnityEngine;
 public class CarController : MonoBehaviour
 {
     [SerializeField] private float _speed = 20f;
-
+    [SerializeField] private GroundCheck _groundCheck;
     public float GetSpeed => _speed;
 
     private Rigidbody2D _rb;
@@ -16,15 +16,15 @@ public class CarController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Move();
+        if (_groundCheck.IsGround)
+        {
+            Move();
+        }
     }
-
 
     private void Move()
     {
         Vector2 direction = new Vector2(transform.right.x, 0f);
         _rb.linearVelocity = direction * _speed + new Vector2(0f, _rb.linearVelocity.y);
     }
-
-
 }
