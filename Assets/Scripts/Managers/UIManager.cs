@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] private CarController _carScript;
+    [SerializeField] private Car _carScript;
     [SerializeField] private TextMeshProUGUI _carSpeed;
 
     private void LateUpdate()
@@ -12,6 +12,6 @@ public class UIManager : MonoBehaviour
     }
     private void UpdateUI()
     {
-        _carSpeed.text =  $"{Mathf.RoundToInt(_carScript.GetSpeed)} km/h";
+        _carSpeed.text =  $"{Mathf.RoundToInt(_carScript.GetCarController.GetSpeed)} km/h";
     }
 }
