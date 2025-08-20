@@ -8,6 +8,12 @@ public class Car : MonoBehaviour
 
     [Space]
 
+    [Header("Air Speed Effect")]
+    [SerializeField] private float _airSlowEffect = 5f;
+    [SerializeField] private float _airBoostEffect = 12f;
+
+    [Space]
+
     [Header("Suspension Settings")]
     [SerializeField][Range(3, 12)] private float _frontSuspensionStiffness = 5f;
     [SerializeField][Range(3, 12)] private float _backSuspensionStiffness = 5f;
@@ -17,6 +23,6 @@ public class Car : MonoBehaviour
     private void Awake()
     {
         _carController = GetComponentInChildren<CarController>();
-        _carController.Init(_groundCheck, _speed, _frontSuspensionStiffness, _backSuspensionStiffness);
+        _carController.Init(_groundCheck, _speed, _airSlowEffect, _airBoostEffect ,_frontSuspensionStiffness, _backSuspensionStiffness);
     }
 }

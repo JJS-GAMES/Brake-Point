@@ -201,8 +201,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 10
   _groundCheck: {fileID: 4231170653712127927}
-  _frontSuspensionStiffness: 5
-  _backSuspensionStiffness: 5
+  _airSlowEffect: 5
+  _airBoostEffect: 12
+  _frontSuspensionStiffness: 8
+  _backSuspensionStiffness: 8
 --- !u!1 &5014448030701484860
 GameObject:
   m_ObjectHideFlags: 0
@@ -498,7 +500,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.003129065, y: -1.0618756}
+  m_Offset: {x: -0.003129065, y: -1.3}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -633,7 +635,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 10
   m_LinearDamping: 0
-  m_AngularDamping: 1
+  m_AngularDamping: 2
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
