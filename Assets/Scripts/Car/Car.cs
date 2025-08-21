@@ -3,7 +3,8 @@ using UnityEngine;
 public class Car : MonoBehaviour
 {
     [Header("Car Settings")]
-    [SerializeField, Tooltip("Car Speed (km/h) / Максимальная корость машинки (км/ч)")] private float _maxSpeed = 10f;
+    [SerializeField, Tooltip("Car mass (kg) / Масса машины (кг)")] private float _mass = 10f;
+    [SerializeField, Tooltip("Car Speed (km/h) / Максимальная cкорость машинки (км/ч)")] private float _maxSpeed = 10f;
     [SerializeField, Tooltip("Acceleration (higher value = faster speed gain) / Ускорение (чем выше значение, тем быстрее разгон)")] private float _acceleration = 10f;
 
     [SerializeField, Tooltip("Ground Check Trigger / Триггер проверки земли")] private GroundCheck _groundCheck;
@@ -26,6 +27,6 @@ public class Car : MonoBehaviour
         // Car Controller Initialization / Инициализация контроллера машинки
 
         _carController = GetComponentInChildren<CarController>();
-        _carController.Init(_groundCheck, _maxSpeed, _acceleration, _airSlowEffect, _airBoostEffect, _frontSuspensionStiffness, _backSuspensionStiffness);
+        _carController.Init(_groundCheck, _mass, _maxSpeed, _acceleration, _airSlowEffect, _airBoostEffect, _frontSuspensionStiffness, _backSuspensionStiffness);
     }
 }

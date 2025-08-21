@@ -12,16 +12,19 @@ public class CarController : MonoBehaviour
     private float _airSlowEffect = 5f;
     private float _airBoostEffect = 12f;
 
+    private float _mass;
     private float _maxSpeed;
     private float _acceleration;
     private GroundCheck _groundCheck;
     private Rigidbody2D _rb;
     public Rigidbody2D GetRb => _rb;
 
-    public void Init(GroundCheck groundCheck, float maxSpeed, float acceleration, float airSlowEffect, float airBoostEffect, float frontSuspensionStiffness, float backSuspensionStiffness)
+    public void Init(GroundCheck groundCheck, float mass, float maxSpeed, float acceleration, float airSlowEffect, float airBoostEffect, float frontSuspensionStiffness, float backSuspensionStiffness)
     {
         _rb = GetComponent<Rigidbody2D>();
 
+        _mass = mass;
+        _rb.mass = _mass;
         _maxSpeed = maxSpeed;
         _acceleration = acceleration;
         _groundCheck = groundCheck;
