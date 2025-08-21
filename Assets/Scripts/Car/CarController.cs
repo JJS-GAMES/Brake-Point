@@ -6,8 +6,8 @@ public class CarController : MonoBehaviour
     [Header("Suspensions")]
     [Space]
 
-    [SerializeField] private WheelJoint2D _frontSuspension;
-    [SerializeField] private WheelJoint2D _backSuspension;
+    [SerializeField, Tooltip("Front suspension component / Компонент передней подвески")] private WheelJoint2D _frontSuspension;
+    [SerializeField, Tooltip("Back suspension component / Компонент задней подвески")] private WheelJoint2D _backSuspension;
 
     private float _airSlowEffect = 5f;
     private float _airBoostEffect = 12f;
@@ -24,16 +24,20 @@ public class CarController : MonoBehaviour
         _speed = speed;
         _groundCheck = groundCheck;
 
+        // AirSpeed / Скорость в воздухе
+
         _airSlowEffect = airSlowEffect;
         _airBoostEffect = airBoostEffect;
 
-        var frontSuspension = _frontSuspension.suspension;
-        frontSuspension.frequency = frontSuspensionStiffness;
-        _frontSuspension.suspension = frontSuspension;
+        // Suspension Settings / Настройки подвески
 
-        var backSuspension = _backSuspension.suspension;
-        backSuspension.frequency = backSuspensionStiffness;
-        _backSuspension.suspension = backSuspension;
+        var frontSuspensionSettings = _frontSuspension.suspension;
+        frontSuspensionSettings.frequency = frontSuspensionStiffness;
+        _frontSuspension.suspension = frontSuspensionSettings;
+
+        var backSuspensionSettings = _backSuspension.suspension;
+        backSuspensionSettings.frequency = backSuspensionStiffness;
+        _backSuspension.suspension = backSuspensionSettings;
     }
 
     private void FixedUpdate()

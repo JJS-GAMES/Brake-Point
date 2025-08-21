@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] private Car _carScript;
+    [SerializeField] private Car _carScript; // Temporary initialization in the inspector / Временно инициализация в инспекторе
     [SerializeField] private TextMeshProUGUI _carSpeed;
 
     private void LateUpdate()
