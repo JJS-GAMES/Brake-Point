@@ -12,19 +12,21 @@ public class CarController : MonoBehaviour
     private float _airSlowEffect = 5f;
     private float _airBoostEffect = 12f;
 
-    private float _speed = 20f;
+    private float _maxSpeed;
+    private float _acceleration;
     private GroundCheck _groundCheck;
     private Rigidbody2D _rb;
     public Rigidbody2D GetRb => _rb;
 
-    public void Init(GroundCheck groundCheck, float speed, float airSlowEffect, float airBoostEffect, float frontSuspensionStiffness, float backSuspensionStiffness)
+    public void Init(GroundCheck groundCheck, float maxSpeed, float acceleration, float airSlowEffect, float airBoostEffect, float frontSuspensionStiffness, float backSuspensionStiffness)
     {
         _rb = GetComponent<Rigidbody2D>();
 
-        _speed = speed;
+        _maxSpeed = maxSpeed;
+        _acceleration = acceleration;
         _groundCheck = groundCheck;
 
-        // AirSpeed / Скорость в воздухе
+        // Air Speed / Скорость в воздухе
 
         _airSlowEffect = airSlowEffect;
         _airBoostEffect = airBoostEffect;
@@ -75,8 +77,19 @@ public class CarController : MonoBehaviour
 
     private void Move()
     {
-        Vector2 direction = new Vector2(transform.right.x, 0f);
-        _rb.linearVelocity = direction * _speed + new Vector2(0f, _rb.linearVelocity.y);
+        Vector2 velocity = _rb.linearVelocity;
+
+        float targetX = transform.right.x * _maxSpeed;
+
+        if (Mathf.Abs(velocity.x) < Mathf.Abs(targetX))
+        {
+            velocity.x += Mathf.Sign(targetX) * _acceleration * Time.fixedDeltaTime;
+        }
+
+        velocity.x = Mathf.Clamp(velocity.x, -_maxSpeed, _maxSpeed);
+
+        _rb.linearVelocity = velocity;
     }
+
 
 }
