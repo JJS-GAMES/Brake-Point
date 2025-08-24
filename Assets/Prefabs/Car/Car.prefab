@@ -60,7 +60,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.26717696, g: 0.46958897, b: 0.7169812, a: 0}
+  m_BackGroundColor: {r: 0.3715847, g: 0.6557376, b: 1, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -234,6 +234,8 @@ MonoBehaviour:
   _maxSpeed: 10
   _acceleration: 10
   _groundCheck: {fileID: 4231170653712127927}
+  _carPhysicsMaterial: {fileID: 6200000, guid: d0e6e03167fe7984cafc62378b1042e2, type: 2}
+  _friction: 0.6
   _airSlowEffect: 3
   _airBoostEffect: 7
   _frontSuspensionStiffness: 8
@@ -332,7 +334,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 4242716630866123642}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -380,12 +382,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 7048532986998360543, guid: 28435177f74ad4247b1d500eb0c1bf39, type: 3}
+  m_Sprite: {fileID: 3780823605375644524, guid: afec7093cbd53094caea367f07efed0d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.125, y: 1.125}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -671,7 +673,7 @@ Rigidbody2D:
   m_LinearDamping: 0
   m_AngularDamping: 1
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: d0e6e03167fe7984cafc62378b1042e2, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
