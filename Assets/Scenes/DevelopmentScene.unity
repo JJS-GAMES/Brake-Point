@@ -415,7 +415,7 @@ Transform:
   m_GameObject: {fileID: 553211834}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 180, y: -3.13, z: 0.050341424}
+  m_LocalPosition: {x: 180, y: -2, z: 0.050341424}
   m_LocalScale: {x: 15.94, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -745,7 +745,7 @@ Transform:
   m_GameObject: {fileID: 688205895}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 120, y: -3.13, z: 0.050341424}
+  m_LocalPosition: {x: 120, y: -2, z: 0.050341424}
   m_LocalScale: {x: 15.94, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -965,7 +965,7 @@ Transform:
   m_GameObject: {fileID: 1075680244}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 150, y: -3.13, z: 0.050341424}
+  m_LocalPosition: {x: 150, y: -2, z: 0.050341424}
   m_LocalScale: {x: 11.13, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1278,7 +1278,7 @@ Transform:
   m_GameObject: {fileID: 1773078218}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 90, y: -3.13, z: 0.050341424}
+  m_LocalPosition: {x: 90, y: -2, z: 0.050341424}
   m_LocalScale: {x: 15.94, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2018,6 +2018,30 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2131145241558458569, guid: 99a615d48ee9f5f429f728801969e3f9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5727244215747483121, guid: 99a615d48ee9f5f429f728801969e3f9, type: 3}
+      propertyPath: ColorModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5727244215747483121, guid: 99a615d48ee9f5f429f728801969e3f9, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key1.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5727244215747483121, guid: 99a615d48ee9f5f429f728801969e3f9, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.m_ColorSpace
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8683372407291640505, guid: 99a615d48ee9f5f429f728801969e3f9, type: 3}
+      propertyPath: ColorModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8683372407291640505, guid: 99a615d48ee9f5f429f728801969e3f9, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key1.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8683372407291640505, guid: 99a615d48ee9f5f429f728801969e3f9, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.m_ColorSpace
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

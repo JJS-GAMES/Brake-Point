@@ -38,16 +38,22 @@ public class Car : MonoBehaviour
     private float _backSuspensionStiffness = 5f;
 
     private CarController _carController;
+    private CarParticleController _carParticleController;
     public CarController GetCarController => _carController;
     private void Awake()
     {
         // Physics Settings Initialization / Инициализация настроек физики
 
-        if(_carPhysicsMaterial != null) _carPhysicsMaterial.friction = _friction;
+        if (_carPhysicsMaterial != null) _carPhysicsMaterial.friction = _friction;
 
         // Car Controller Initialization / Инициализация контроллера машинки
 
         _carController = GetComponentInChildren<CarController>();
+        _carParticleController = _carController.GetComponent<CarParticleController>();
         _carController.Init(_groundCheck, _mass, _maxSpeed, _acceleration, _airSlowEffect, _airBoostEffect, _frontSuspensionStiffness, _backSuspensionStiffness);
+
+        // Car Particle Controller Initialization / Инициализация контроллера парртиклов машинки
+
+        _carParticleController.Init(_carController, _groundCheck);
     }
 }
