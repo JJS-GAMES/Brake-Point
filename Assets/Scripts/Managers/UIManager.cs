@@ -12,6 +12,6 @@ public class UIManager : MonoBehaviour
     }
     private void UpdateUI()
     {
-        _carSpeed.text =  $"{Mathf.RoundToInt(_carScript.GetCarController.GetRb.linearVelocity.magnitude)} km/h";
+        _carSpeed.text =  $"Speed: {Mathf.RoundToInt(_carScript.GetCarController.GetRb.linearVelocity.magnitude)} km/h";
     }
 }
