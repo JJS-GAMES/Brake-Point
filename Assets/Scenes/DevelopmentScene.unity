@@ -9246,7 +9246,7 @@ TilemapRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -104
   m_ChunkSize: {x: 32, y: 32, z: 32}
-  m_ChunkCullingBounds: {x: 15.5, y: 7.5, z: 0}
+  m_ChunkCullingBounds: {x: 2.06, y: 0.78, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 0
@@ -15562,66 +15562,6 @@ PrefabInstance:
     - target: {fileID: 2131145241558458569, guid: 99a615d48ee9f5f429f728801969e3f9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5727244215747483121, guid: 99a615d48ee9f5f429f728801969e3f9, type: 3}
-      propertyPath: ColorModule.enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5727244215747483121, guid: 99a615d48ee9f5f429f728801969e3f9, type: 3}
-      propertyPath: ColorModule.gradient.maxGradient.atime1
-      value: 56669
-      objectReference: {fileID: 0}
-    - target: {fileID: 5727244215747483121, guid: 99a615d48ee9f5f429f728801969e3f9, type: 3}
-      propertyPath: ColorModule.gradient.maxGradient.atime2
-      value: 65535
-      objectReference: {fileID: 0}
-    - target: {fileID: 5727244215747483121, guid: 99a615d48ee9f5f429f728801969e3f9, type: 3}
-      propertyPath: ColorModule.gradient.maxGradient.key1.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5727244215747483121, guid: 99a615d48ee9f5f429f728801969e3f9, type: 3}
-      propertyPath: ColorModule.gradient.maxGradient.m_ColorSpace
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5727244215747483121, guid: 99a615d48ee9f5f429f728801969e3f9, type: 3}
-      propertyPath: ColorModule.gradient.maxGradient.m_NumAlphaKeys
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6646128246152185438, guid: 99a615d48ee9f5f429f728801969e3f9, type: 3}
-      propertyPath: m_BackGroundColor.b
-      value: 0.83921576
-      objectReference: {fileID: 0}
-    - target: {fileID: 6646128246152185438, guid: 99a615d48ee9f5f429f728801969e3f9, type: 3}
-      propertyPath: m_BackGroundColor.g
-      value: 0.95294124
-      objectReference: {fileID: 0}
-    - target: {fileID: 6646128246152185438, guid: 99a615d48ee9f5f429f728801969e3f9, type: 3}
-      propertyPath: m_BackGroundColor.r
-      value: 0.9490197
-      objectReference: {fileID: 0}
-    - target: {fileID: 8683372407291640505, guid: 99a615d48ee9f5f429f728801969e3f9, type: 3}
-      propertyPath: ColorModule.enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8683372407291640505, guid: 99a615d48ee9f5f429f728801969e3f9, type: 3}
-      propertyPath: ColorModule.gradient.maxGradient.atime1
-      value: 56669
-      objectReference: {fileID: 0}
-    - target: {fileID: 8683372407291640505, guid: 99a615d48ee9f5f429f728801969e3f9, type: 3}
-      propertyPath: ColorModule.gradient.maxGradient.atime2
-      value: 65535
-      objectReference: {fileID: 0}
-    - target: {fileID: 8683372407291640505, guid: 99a615d48ee9f5f429f728801969e3f9, type: 3}
-      propertyPath: ColorModule.gradient.maxGradient.key1.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8683372407291640505, guid: 99a615d48ee9f5f429f728801969e3f9, type: 3}
-      propertyPath: ColorModule.gradient.maxGradient.m_ColorSpace
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8683372407291640505, guid: 99a615d48ee9f5f429f728801969e3f9, type: 3}
-      propertyPath: ColorModule.gradient.maxGradient.m_NumAlphaKeys
-      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

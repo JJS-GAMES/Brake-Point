@@ -60,7 +60,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.3715847, g: 0.6557376, b: 1, a: 0}
+  m_BackGroundColor: {r: 0.9490197, g: 0.95294124, b: 0.83921576, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1453,7 +1453,7 @@ ParticleSystem:
         m_RotationOrder: 4
     separateAxes: 0
   ColorModule:
-    enabled: 0
+    enabled: 1
     gradient:
       serializedVersion: 2
       minMaxState: 1
@@ -1478,17 +1478,17 @@ ParticleSystem:
         ctime6: 0
         ctime7: 0
         atime0: 0
-        atime1: 65535
-        atime2: 0
+        atime1: 56669
+        atime2: 65535
         atime3: 0
         atime4: 0
         atime5: 0
         atime6: 0
         atime7: 0
         m_Mode: 0
-        m_ColorSpace: -1
+        m_ColorSpace: 0
         m_NumColorKeys: 2
-        m_NumAlphaKeys: 2
+        m_NumAlphaKeys: 3
       minGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -6286,7 +6286,7 @@ ParticleSystem:
         m_RotationOrder: 4
     separateAxes: 0
   ColorModule:
-    enabled: 0
+    enabled: 1
     gradient:
       serializedVersion: 2
       minMaxState: 1
@@ -6311,17 +6311,17 @@ ParticleSystem:
         ctime6: 0
         ctime7: 0
         atime0: 0
-        atime1: 65535
-        atime2: 0
+        atime1: 56669
+        atime2: 65535
         atime3: 0
         atime4: 0
         atime5: 0
         atime6: 0
         atime7: 0
         m_Mode: 0
-        m_ColorSpace: -1
+        m_ColorSpace: 0
         m_NumColorKeys: 2
-        m_NumAlphaKeys: 2
+        m_NumAlphaKeys: 3
       minGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -9896,16 +9896,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a1530dfa2447cf4a85b4a394d939ca1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mass: 10
-  _maxSpeed: 10
-  _acceleration: 10
+  _carSettings: {fileID: 11400000, guid: 969ef862987e07b4297445b8fc836d9a, type: 2}
   _groundCheck: {fileID: 4231170653712127927}
-  _carPhysicsMaterial: {fileID: 6200000, guid: d0e6e03167fe7984cafc62378b1042e2, type: 2}
-  _friction: 0.6
-  _airSlowEffect: 3
-  _airBoostEffect: 7
-  _frontSuspensionStiffness: 8
-  _backSuspensionStiffness: 8
 --- !u!1 &5014448030701484860
 GameObject:
   m_ObjectHideFlags: 0
