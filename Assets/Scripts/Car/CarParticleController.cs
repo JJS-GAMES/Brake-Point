@@ -2,14 +2,13 @@
 
 public class CarParticleController : MonoBehaviour
 {
-    [Header("Particle Panels / Панели частиц")]
+    [Header("Particle Systems / Партикл системы")]
     [SerializeField] private ParticleSystem _frontWheelParticleSystem;
     [SerializeField] private ParticleSystem _backWheelParticleSystem;
 
-    [Header("Behavior Settings / Настройки поведения")]
-    [SerializeField, Range(1, 20)] private float _decaySpeed = 10f;
-    [SerializeField, Range(1, 20)] private float _restoreSpeed = 20f;
-    [SerializeField] private float _minSpeedToEmit = 0.1f;
+    private float _decaySpeed = 20f;
+    private float _restoreSpeed = 10f;
+    private float _minSpeedToEmit = 0.1f;
 
     private CarController _carController;
     private GroundCheck _groundCheck;
@@ -17,10 +16,15 @@ public class CarParticleController : MonoBehaviour
     private float _frontDefaultRate;
     private float _backDefaultRate;
 
-    public void Init(CarController carController, GroundCheck groundCheck)
+    public void Init(CarController carController, GroundCheck groundCheck, float decaySpeed, float restoreSpeed, float minSpeedToEmit)
     {
         _carController = carController;
         _groundCheck = groundCheck;
+
+        _decaySpeed = decaySpeed;
+        _restoreSpeed = restoreSpeed;
+        _minSpeedToEmit = minSpeedToEmit;
+
         CacheDefaultRates();
     }
 

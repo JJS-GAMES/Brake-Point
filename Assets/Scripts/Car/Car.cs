@@ -26,6 +26,6 @@ public class Car : MonoBehaviour
 
         // Car Particle Controller Initialization / Инициализация контроллера парртиклов машинки
 
-        _carParticleController.Init(_carController, _groundCheck);
+        _carParticleController.Init(_carController, _groundCheck, _carSettings.DecaySpeed, _carSettings.RestoreSpeed, _carSettings.MinSpeedToEmit);
     }
 }

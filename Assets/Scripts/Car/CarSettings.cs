@@ -33,4 +33,14 @@ public class CarSettings : ScriptableObject
     public float FrontSuspensionStiffness = 8f;
     [Range(3, 12), Tooltip("Stiffness of the back suspension (range 3-12) / Жесткость задней подвески (диапазон 3–12)")]
     public float BackSuspensionStiffness = 8f;
+
+    [Header("Particle Settings / Настройки партиклов")]
+    [Range(1, 20), Tooltip("Fade-out speed of particles when car is airborne / Скорость исчезновения частиц, когда машина в воздухе")]
+    public float DecaySpeed = 20f;
+
+    [Range(1, 20), Tooltip("Fade-in speed of particles when car lands / Скорость восстановления частиц, когда машина снова касается земли")]
+    public float RestoreSpeed = 10f;
+
+    [Tooltip("Minimum car speed required to emit particles / Минимальная скорость машины, при которой начинают воспроизводиться частицы")]
+    public float MinSpeedToEmit = 0.1f;
 }

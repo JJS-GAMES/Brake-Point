@@ -3,7 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class CarController : MonoBehaviour
 {
-    [Header("Suspensions")]
+    [Header("Suspensions / Подвески")]
     [Space]
 
     [SerializeField, Tooltip("Front suspension component / Компонент передней подвески")] private WheelJoint2D _frontSuspension;
@@ -12,9 +12,10 @@ public class CarController : MonoBehaviour
     private float _airSlowEffect = 5f;
     private float _airBoostEffect = 12f;
 
-    private float _mass;
-    private float _maxSpeed;
-    private float _acceleration;
+    private float _mass = 10;
+    private float _maxSpeed = 10;
+    private float _acceleration = 10;
+
     private GroundCheck _groundCheck;
     private Rigidbody2D _rb;
     public Rigidbody2D GetRb => _rb;
@@ -22,6 +23,8 @@ public class CarController : MonoBehaviour
     public void Init(GroundCheck groundCheck, float mass, float maxSpeed, float acceleration, float airSlowEffect, float airBoostEffect, float frontSuspensionStiffness, float backSuspensionStiffness)
     {
         _rb = GetComponent<Rigidbody2D>();
+
+        // Main Settings / Основные настройки
 
         _mass = mass;
         _rb.mass = _mass;
