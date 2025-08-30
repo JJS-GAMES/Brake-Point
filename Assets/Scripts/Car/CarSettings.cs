@@ -3,6 +3,13 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Car Settings", menuName = "Car/Settings", order = 1)]
 public class CarSettings : ScriptableObject
 {
+    [Header("Camera Settings / Настройки камеры")]
+
+    [Range(0.1f, 10),Tooltip("Camera follow smoothness (lower value = smoother movement) / Плавность следования камеры за машиной (меньше значение = более плавное движение)")]
+    public float Smooth = 5f;
+    [Tooltip("Camera offset relative to the car / Смещение камеры относительно машины")]
+    public Vector3 Offset = new Vector3(5, 3, 10);
+
     [Header("Main Settings / Основные настройки")]
 
     [Tooltip("Car mass (kg) / Масса машины (кг)")]

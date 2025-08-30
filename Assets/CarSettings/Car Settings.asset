@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d88d3602da3ade45b5a0330788d5a3e, type: 3}
   m_Name: Car Settings
   m_EditorClassIdentifier: 
+  Smooth: 1
+  Offset: {x: 5, y: 3, z: -10}
   Mass: 10
   MaxSpeed: 10
   Acceleration: 10
@@ -21,3 +23,6 @@ MonoBehaviour:
   AirBoostEffect: 7
   FrontSuspensionStiffness: 8
   BackSuspensionStiffness: 8
+  DecaySpeed: 20
+  RestoreSpeed: 10
+  MinSpeedToEmit: 0.1

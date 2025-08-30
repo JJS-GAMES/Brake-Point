@@ -6,8 +6,13 @@ public class Car : MonoBehaviour
 
     [SerializeField] private CarSettings _carSettings;
 
+    [Header("Camera Settings / Настройки камеры")]
+
+    [SerializeField] private CameraChase2D _cameraChase2D;
+    [SerializeField] private Transform _target;
+
     [SerializeField, Tooltip("Ground Check Trigger / Триггер проверки земли")]
-    public GroundCheck _groundCheck;
+    private GroundCheck _groundCheck;
 
     private CarController _carController;
     private CarParticleController _carParticleController;
@@ -27,5 +32,10 @@ public class Car : MonoBehaviour
         // Car Particle Controller Initialization / Инициализация контроллера парртиклов машинки
 
         _carParticleController.Init(_carController, _groundCheck, _carSettings.DecaySpeed, _carSettings.RestoreSpeed, _carSettings.MinSpeedToEmit);
+    }
+
+    private void FixedUpdate()
+    {
+        if(_cameraChase2D != null && _target != null) _cameraChase2D.Chasing(_target, _carSettings.Offset, _carSettings.Smooth);
     }
 }

@@ -2067,6 +2067,17 @@ PolygonCollider2D:
       - {x: 0.29296875, y: 0.40234375}
       - {x: 0.15234375, y: 0.47265625}
   m_UseDelaunayMesh: 0
+--- !u!114 &191037531 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7123191998851299519, guid: 99a615d48ee9f5f429f728801969e3f9, type: 3}
+  m_PrefabInstance: {fileID: 537673607906384069}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 573674aa341441747ae89e4a860d3e7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &214911351
 GameObject:
   m_ObjectHideFlags: 0
@@ -12038,6 +12049,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!4 &1714588075 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3965676750135846235, guid: 99a615d48ee9f5f429f728801969e3f9, type: 3}
+  m_PrefabInstance: {fileID: 537673607906384069}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1773078218
 GameObject:
   m_ObjectHideFlags: 0
@@ -15519,6 +15535,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1307651422265941703, guid: 99a615d48ee9f5f429f728801969e3f9, type: 3}
+      propertyPath: _target
+      value: 
+      objectReference: {fileID: 1714588075}
+    - target: {fileID: 1307651422265941703, guid: 99a615d48ee9f5f429f728801969e3f9, type: 3}
+      propertyPath: _cameraChase2D
+      value: 
+      objectReference: {fileID: 191037531}
     - target: {fileID: 2043157057007907640, guid: 99a615d48ee9f5f429f728801969e3f9, type: 3}
       propertyPath: m_Name
       value: Car
