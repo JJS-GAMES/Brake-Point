@@ -5,7 +5,7 @@ AssetOrigin:
   productId: 133118
   packageName: Free Pixel Art Hill
   packageVersion: 1.0
-  assetPath: Assets/Free Pixel Art Hills/PNG/Hills Layer 04.png
+  assetPath: Assets/Arts/Tilemaps/Layers/Hills Layer 04.png
   uploadId: 341369
 TextureImporter:
   internalIDToNameTable: []
@@ -106,7 +106,7 @@ TextureImporter:
     resizeAlgorithm: 0
     textureFormat: 47
     textureCompression: 1
-    compressionQuality: 50
+    compressionQuality: 100
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 1
