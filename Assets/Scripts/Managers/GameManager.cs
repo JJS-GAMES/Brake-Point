@@ -4,14 +4,9 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private Button _respawnButton; // Перенести в UIManager
-
-    private void Start()
-    {
-        _respawnButton.onClick.RemoveAllListeners();
-        _respawnButton.onClick.AddListener(RestartButton);
-    }
-    private void RestartButton()
+    [SerializeField] private GameObject _startZone;
+    [SerializeField] private GameObject _finishZone;
+    public void RestartLevel()
     {
         Scene currentScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(currentScene.buildIndex);
