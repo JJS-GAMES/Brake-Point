@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Car _carScript; // Temporary initialization in the inspector / Временно инициализация в инспекторе
     [Space]
     [SerializeField] private TextMeshProUGUI _carSpeed;
+    [SerializeField] private Scrollbar _progressBar;
     [SerializeField] private Button _respawnButton;
 
     private void Start()
@@ -22,5 +23,6 @@ public class UIManager : MonoBehaviour
     private void UpdateUI()
     {
         _carSpeed.text = $"Speed: {Mathf.RoundToInt(_carScript.GetCarController.GetRb.linearVelocity.magnitude)} km/h";
+        _progressBar.size = _gameManager.CalculateLevelProgress();
     }
 }

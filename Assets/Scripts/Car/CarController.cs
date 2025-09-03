@@ -24,7 +24,8 @@ public class CarController : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
 
-        // Main Settings / Основные настройки
+        // Main Settings
+        // Основные настройки
 
         _mass = mass;
         _rb.mass = _mass;
@@ -32,12 +33,14 @@ public class CarController : MonoBehaviour
         _acceleration = acceleration;
         _groundCheck = groundCheck;
 
-        // Air Speed / Скорость в воздухе
+        // Air Speed
+        // Скорость в воздухе
 
         _airSlowEffect = airSlowEffect;
         _airBoostEffect = airBoostEffect;
 
-        // Suspension Settings / Настройки подвески
+        // Suspension Settings
+        // Настройки подвески
 
         var frontSuspensionSettings = _frontSuspension.suspension;
         frontSuspensionSettings.frequency = frontSuspensionStiffness;

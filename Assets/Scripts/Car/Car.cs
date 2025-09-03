@@ -10,6 +10,7 @@ public class Car : MonoBehaviour
 
     [SerializeField] private CameraChase2D _cameraChase2D;
     [SerializeField] private Transform _target;
+    public Transform Target => _target;
 
     [SerializeField, Tooltip("Ground Check Trigger / Триггер проверки земли")]
     private GroundCheck _groundCheck;
@@ -19,17 +20,20 @@ public class Car : MonoBehaviour
     public CarController GetCarController => _carController;
     private void Awake()
     {
-        // Physics Settings Initialization / Инициализация настроек физики
+        // Physics Settings Initialization
+        // Инициализация настроек физики
 
         if (_carSettings.CarPhysicsMaterial != null) _carSettings.CarPhysicsMaterial.friction = _carSettings.Friction;
 
-        // Car Controller Initialization / Инициализация контроллера машинки
+        // Car Controller Initialization
+        // Инициализация контроллера машинки
 
         _carController = GetComponentInChildren<CarController>();
         _carParticleController = _carController.GetComponent<CarParticleController>();
         _carController.Init(_groundCheck, _carSettings.Mass, _carSettings.MaxSpeed, _carSettings.Acceleration, _carSettings.AirSlowEffect, _carSettings.AirBoostEffect, _carSettings.FrontSuspensionStiffness, _carSettings.BackSuspensionStiffness);
 
-        // Car Particle Controller Initialization / Инициализация контроллера парртиклов машинки
+        // Car Particle Controller Initialization
+        // Инициализация контроллера парртиклов машинки
 
         _carParticleController.Init(_carController, _groundCheck, _carSettings.DecaySpeed, _carSettings.RestoreSpeed, _carSettings.MinSpeedToEmit);
     }
