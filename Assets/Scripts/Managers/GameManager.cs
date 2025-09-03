@@ -5,6 +5,8 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField,Tooltip("Player car / Машина игрока")] 
     private Car _car;
+
+    [Header("Zones / Зоны")]
     [Space, SerializeField, Tooltip("Prefab of the start area on the stage / Префаб стартовой зоны на сцене")]
     private GameObject _startZone;
     [SerializeField, Tooltip("Prefab of the finish area on the stage / Префаб финишной зоны на сцене")] 

@@ -7,6 +7,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameManager _gameManager; // Temporary initialization in the inspector / ¬ременно инициализаци€ в инспекторе
     [SerializeField] private Car _carScript; // Temporary initialization in the inspector / ¬ременно инициализаци€ в инспекторе
     [Space]
+    [Header("UI Elements / UI Ёлементы")]
     [SerializeField] private TextMeshProUGUI _carSpeed;
     [SerializeField] private Scrollbar _progressBar;
     [SerializeField] private Button _respawnButton;

@@ -47,9 +47,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 573674aa341441747ae89e4a860d3e7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _smooth: 5
-  _target: {fileID: 3965676750135846235}
-  _offset: {x: 5, y: 3, z: 0}
 --- !u!20 &6646128246152185438
 Camera:
   m_ObjectHideFlags: 0
@@ -9897,6 +9894,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _carSettings: {fileID: 11400000, guid: 969ef862987e07b4297445b8fc836d9a, type: 2}
+  _cameraChase2D: {fileID: 7123191998851299519}
+  _target: {fileID: 3965676750135846235}
   _groundCheck: {fileID: 4231170653712127927}
 --- !u!1 &5014448030701484860
 GameObject:
