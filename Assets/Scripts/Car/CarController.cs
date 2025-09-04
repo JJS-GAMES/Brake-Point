@@ -16,16 +16,20 @@ public class CarController : MonoBehaviour
     private float _maxSpeed = 10;
     private float _acceleration = 10;
 
+    private bool _isWorkingEngine = true;
+
     private GroundCheck _groundCheck;
     private Rigidbody2D _rb;
     public Rigidbody2D GetRb => _rb;
 
-    public void Init(GroundCheck groundCheck, float mass, float maxSpeed, float acceleration, float airSlowEffect, float airBoostEffect, float frontSuspensionStiffness, float backSuspensionStiffness)
+    public void Init(GroundCheck groundCheck, bool isWorkingEngine, float mass, float maxSpeed, float acceleration, float airSlowEffect, float airBoostEffect, float frontSuspensionStiffness, float backSuspensionStiffness)
     {
         _rb = GetComponent<Rigidbody2D>();
 
         // Main Settings
         // Основные настройки
+
+        _isWorkingEngine = isWorkingEngine;
 
         _mass = mass;
         _rb.mass = _mass;
@@ -53,11 +57,11 @@ public class CarController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_groundCheck.IsGround)
+        if (_groundCheck.IsGround && _isWorkingEngine)
         {
             Move();
         }
-        else
+        else if(!_groundCheck.IsGround)
         {
             ApplyAirSpeedEffect();
         }

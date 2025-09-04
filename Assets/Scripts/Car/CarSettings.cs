@@ -18,6 +18,9 @@ public class CarSettings : ScriptableObject
     public float MaxSpeed = 10f;
     [Tooltip("Acceleration (higher value = faster speed gain) / Ускорение (чем выше значение, тем быстрее разгон)")]
     public float Acceleration = 10f;
+
+    [Space, Tooltip("Is engine running from beginning? / Работает ли двигатель с самого начала?")]
+    public bool IsWorkingEngine = true;
     [Space]
 
     [Header("Physics Settings / Настройки физики")]
@@ -33,9 +36,8 @@ public class CarSettings : ScriptableObject
     public float AirSlowEffect = 3f;
     [Tooltip("Acceleration of speed during descent (when the car is flying down) / Ускорение скорости при спуске (когда машина летит вниз)")]
     public float AirBoostEffect = 7f;
-    [Space]
 
-    [Header("Suspension Settings / Настройки подвески")]
+    [Space, Header("Suspension Settings / Настройки подвески")]
     [Range(3, 12), Tooltip("Stiffness of the front suspension (range 3-12) / Жесткость передней подвески (диапазон 3–12)")]
     public float FrontSuspensionStiffness = 8f;
     [Range(3, 12), Tooltip("Stiffness of the back suspension (range 3-12) / Жесткость задней подвески (диапазон 3–12)")]

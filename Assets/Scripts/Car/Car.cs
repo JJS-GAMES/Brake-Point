@@ -18,7 +18,7 @@ public class Car : MonoBehaviour
     private CarController _carController;
     private CarParticleController _carParticleController;
     public CarController GetCarController => _carController;
-    private void Awake()
+    private void Awake() // ¬ременно в Update дл€ эскперементов, в будущем ќЅя«ј“≈Ћ№Ќќ вернуть в Awake!
     {
         // Physics Settings Initialization
         // »нициализаци€ настроек физики
@@ -30,7 +30,7 @@ public class Car : MonoBehaviour
 
         _carController = GetComponentInChildren<CarController>();
         _carParticleController = _carController.GetComponent<CarParticleController>();
-        _carController.Init(_groundCheck, _carSettings.Mass, _carSettings.MaxSpeed, _carSettings.Acceleration, _carSettings.AirSlowEffect, _carSettings.AirBoostEffect, _carSettings.FrontSuspensionStiffness, _carSettings.BackSuspensionStiffness);
+        _carController.Init(_groundCheck, _carSettings.IsWorkingEngine, _carSettings.Mass, _carSettings.MaxSpeed, _carSettings.Acceleration, _carSettings.AirSlowEffect, _carSettings.AirBoostEffect, _carSettings.FrontSuspensionStiffness, _carSettings.BackSuspensionStiffness);
 
         // Car Particle Controller Initialization
         // »нициализаци€ контроллера парртиклов машинки
