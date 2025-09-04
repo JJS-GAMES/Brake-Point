@@ -15,7 +15,8 @@ MonoBehaviour:
   Smooth: 5
   Offset: {x: 5, y: 1, z: -10}
   Mass: 10
-  MaxSpeed: 10
+  EngineMaxSpeed: 10
+  CoastMaxSpeed: 10
   Acceleration: 10
   IsWorkingEngine: 1
   CarPhysicsMaterial: {fileID: 6200000, guid: d0e6e03167fe7984cafc62378b1042e2, type: 2}

@@ -14,8 +14,10 @@ public class CarSettings : ScriptableObject
 
     [Tooltip("Car mass (kg) / Масса машины (кг)")]
     public float Mass = 10f;
-    [Tooltip("Car Speed (km/h) / Максимальная cкорость машинки (км/ч)")]
-    public float MaxSpeed = 10f;
+    [Tooltip("Engine Max Speed (km/h) / Максимальная скорость при работающем двигателе (км/ч)")]
+    public float EngineMaxSpeed = 10f;
+    [Tooltip("Coast Max Speed (km/h) / Максимальная скорость машинки по инерции (км/ч)")]
+    public float CoastMaxSpeed = 5f;
     [Tooltip("Acceleration (higher value = faster speed gain) / Ускорение (чем выше значение, тем быстрее разгон)")]
     public float Acceleration = 10f;
 

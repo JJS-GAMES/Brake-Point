@@ -13,7 +13,8 @@ public class CarController : MonoBehaviour
     private float _airBoostEffect = 12f;
 
     private float _mass = 10;
-    private float _maxSpeed = 10;
+    private float _engineMaxSpeed = 10;
+    private float _coastMaxSpeed = 10;
     private float _acceleration = 10;
 
     private bool _isWorkingEngine = true;
@@ -22,7 +23,7 @@ public class CarController : MonoBehaviour
     private Rigidbody2D _rb;
     public Rigidbody2D GetRb => _rb;
 
-    public void Init(GroundCheck groundCheck, bool isWorkingEngine, float mass, float maxSpeed, float acceleration, float airSlowEffect, float airBoostEffect, float frontSuspensionStiffness, float backSuspensionStiffness)
+    public void Init(GroundCheck groundCheck, bool isWorkingEngine, float mass, float engineMaxSpeed, float coastMaxSpeed, float acceleration, float airSlowEffect, float airBoostEffect, float frontSuspensionStiffness, float backSuspensionStiffness)
     {
         _rb = GetComponent<Rigidbody2D>();
 
@@ -33,7 +34,8 @@ public class CarController : MonoBehaviour
 
         _mass = mass;
         _rb.mass = _mass;
-        _maxSpeed = maxSpeed;
+        _engineMaxSpeed = engineMaxSpeed;
+        _coastMaxSpeed = coastMaxSpeed;
         _acceleration = acceleration;
         _groundCheck = groundCheck;
 
@@ -57,7 +59,7 @@ public class CarController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_groundCheck.IsGround && _isWorkingEngine)
+        if (_groundCheck.IsGround)
         {
             Move();
         }
@@ -92,17 +94,28 @@ public class CarController : MonoBehaviour
     {
         Vector2 velocity = _rb.linearVelocity;
 
-        float targetX = transform.right.x * _maxSpeed;
-
-        if (Mathf.Abs(velocity.x) < Mathf.Abs(targetX))
+        if (_isWorkingEngine) // If the engine is running, push the car forward. / Если двигатель работает, толкаем машинку вперед
         {
-            velocity.x += Mathf.Sign(targetX) * _acceleration * Time.fixedDeltaTime;
-        }
+            float targetX = transform.right.x * _engineMaxSpeed;
 
-        velocity.x = Mathf.Clamp(velocity.x, -_maxSpeed, _maxSpeed);
+            if (Mathf.Abs(velocity.x) < Mathf.Abs(targetX))
+            {
+                velocity.x += Mathf.Sign(targetX) * _acceleration * Time.fixedDeltaTime;
+            }
+
+            velocity.x = Mathf.Clamp(velocity.x, -_engineMaxSpeed, _engineMaxSpeed);
+        }
+        else // If the engine is not running, the car is traveling by inertia. / Если двигатель не работает, машинка едет по инерции.
+        {
+            float max = _coastMaxSpeed;
+            velocity.x = Mathf.MoveTowards(velocity.x, Mathf.Clamp(velocity.x, -max, max), _acceleration * Time.fixedDeltaTime);
+        }
 
         _rb.linearVelocity = velocity;
     }
 
-
+    public void ToggleEngineWork(bool toggle)
+    {
+        _isWorkingEngine = toggle;
+    }
 }
