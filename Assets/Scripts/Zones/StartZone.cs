@@ -4,9 +4,12 @@ using UnityEngine;
 public class StartZone : MonoBehaviour
 {
     private Car _car;
-
+    private BoxCollider2D _boxCollider;
     public void Init(Car car)
     {
+        _boxCollider = GetComponent<BoxCollider2D>();
+        _boxCollider.isTrigger = true;
+
         _car = car;
     }
 

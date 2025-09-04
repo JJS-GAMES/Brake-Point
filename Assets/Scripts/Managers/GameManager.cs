@@ -3,6 +3,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private UIManager _uiManager; // Temporary initialization in the inspector / Временно инициализация в инспекторе
+
     [SerializeField,Tooltip("Player car / Машина игрока")] 
     private Car _car;
 
@@ -22,7 +24,7 @@ public class GameManager : MonoBehaviour
         _totalDistance = Vector2.Distance(_startZone.transform.position,_finishZone.gameObject.transform.position);
 
         _startZone.Init(_car);
-        _finishZone.Init(_car);
+        _finishZone.Init(_car, _uiManager);
     }
 
     public void RestartLevel()
