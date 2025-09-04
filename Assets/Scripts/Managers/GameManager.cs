@@ -8,9 +8,9 @@ public class GameManager : MonoBehaviour
 
     [Header("Zones / Зоны")]
     [Space, SerializeField, Tooltip("Prefab of the start area on the stage / Префаб стартовой зоны на сцене")]
-    private GameObject _startZone;
+    private StartZone _startZone;
     [SerializeField, Tooltip("Prefab of the finish area on the stage / Префаб финишной зоны на сцене")] 
-    private GameObject _finishZone;
+    private FinishZone _finishZone;
 
     private float _totalDistance;
 
@@ -19,7 +19,10 @@ public class GameManager : MonoBehaviour
         // We calculate and save the total distance between start and finish
         // Считаем и сохраняем общее расстояние между стартом и финишем
 
-        _totalDistance = Vector2.Distance(_startZone.transform.position,_finishZone.transform.position);
+        _totalDistance = Vector2.Distance(_startZone.transform.position,_finishZone.gameObject.transform.position);
+
+        _startZone.Init(_car);
+        _finishZone.Init(_car);
     }
 
     public void RestartLevel()
@@ -33,7 +36,7 @@ public class GameManager : MonoBehaviour
         // We count how much the car has traveled
         // Считаем, сколько проехала машина
 
-        float carDistance = Vector2.Distance(_startZone.transform.position, _car.Target.transform.position);
+        float carDistance = Vector2.Distance(_startZone.gameObject.transform.position, _car.Target.transform.position);
 
         float progress = Mathf.Clamp01(carDistance / _totalDistance);
 
