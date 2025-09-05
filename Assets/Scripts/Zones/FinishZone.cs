@@ -3,6 +3,10 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]
 public class FinishZone : MonoBehaviour
 {
+    [SerializeField, Tooltip("If the car's speed is equal to or below this value, then a successful finish is counted. / Если скорость машинки равна или ниже этого значения, то засчитывается успешный финиш")]
+    private float _finishSpeedThreshold = 2f;
+
+
     private Car _car;
     private BoxCollider2D _boxCollider;
     private UIManager _uiManager;
@@ -16,15 +20,18 @@ public class FinishZone : MonoBehaviour
         _uiManager = uiManager;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (_car == null) return;
 
         if (collision.GetComponent<CarController>() == _car.GetCarController)
         {
-            Debug.Log("Машинка в зоне финиша");
-
-            _uiManager?.ToggleFinishUI(true);
+            if (Mathf.RoundToInt(_car.GetCarController.GetRb.linearVelocity.magnitude) <= _finishSpeedThreshold)
+            {
+                Debug.Log("Машинка замедлилась в зоне финиша");
+                _uiManager?.ToggleFinishUI(true);
+            }
         }
     }
+
 }
