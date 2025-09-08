@@ -1965,7 +1965,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &96001415
 Transform:
   m_ObjectHideFlags: 0
@@ -7336,7 +7336,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: -100
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 2.06, y: 0.78, z: 0}
   m_MaxChunkCount: 16
@@ -14853,7 +14853,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0.42
+  m_EdgeRadius: 0
 --- !u!212 &1133424647
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -15090,7 +15090,7 @@ Transform:
   m_GameObject: {fileID: 1164412600}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.79, z: 0}
+  m_LocalPosition: {x: 0, y: -2, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -15139,7 +15139,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: -100
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 2.06, y: 0.78, z: 0}
   m_MaxChunkCount: 16
@@ -29720,5 +29720,5 @@ SceneRoots:
   - {fileID: 659953880}
   - {fileID: 1022508383}
   - {fileID: 612071161}
-  - {fileID: 615938047}
   - {fileID: 1219447190}
+  - {fileID: 615938047}
