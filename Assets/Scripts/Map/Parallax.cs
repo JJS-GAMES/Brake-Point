@@ -4,7 +4,6 @@ using UnityEngine;
 public class Parallax : MonoBehaviour
 {
     [SerializeField] private float _parallaxFactor = 0.5f;
-    [SerializeField] private Material _material;
 
     private Transform _cameraTransform;
     private float _startCameraX;
@@ -18,7 +17,6 @@ public class Parallax : MonoBehaviour
     void LateUpdate()
     {
         float deltaX = _cameraTransform.position.x - _startCameraX;
-        _material.SetFloat("_OffsetX", deltaX * _parallaxFactor);
     }
 
 }

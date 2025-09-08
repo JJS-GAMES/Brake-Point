@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Zones / Зоны")]
     [Space, SerializeField, Tooltip("Prefab of the start area on the stage / Префаб стартовой зоны на сцене")]
-    private StartZone _startZone;
+    private GameObject _startZone;
     [SerializeField, Tooltip("Prefab of the finish area on the stage / Префаб финишной зоны на сцене")] 
     private FinishZone _finishZone;
 
@@ -23,7 +23,6 @@ public class GameManager : MonoBehaviour
 
         _totalDistance = Vector2.Distance(_startZone.transform.position,_finishZone.gameObject.transform.position);
 
-        _startZone.Init(_car);
         _finishZone.Init(_car, _uiManager);
     }
 
