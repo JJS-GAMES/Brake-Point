@@ -16,6 +16,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Scrollbar _progressBar;
     [SerializeField] private Button _respawnButton;
 
+    [Space, SerializeField] private AccelerationPedal _accelerationPedal;
+    [SerializeField] private BrakePedal _brakePedal;
+
     [Header("Finish UI")]
     [SerializeField] private GameObject _finishInterface;
 
@@ -36,6 +39,9 @@ public class UIManager : MonoBehaviour
         {
             _blackoutCanvasGroup = _blackout.gameObject.AddComponent<CanvasGroup>();
         }
+
+        _accelerationPedal?.Init(_carScript.GetCarController);
+        _brakePedal?.Init(_carScript.GetCarController);
 
         // Finish UI Initialization
         _restartButton?.onClick.RemoveAllListeners();
