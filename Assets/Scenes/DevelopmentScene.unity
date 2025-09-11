@@ -1065,7 +1065,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d01b9b60d85281b4fae1145df604b7ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _parallaxFactor: 0.5
 --- !u!1 &76503944
 GameObject:
   m_ObjectHideFlags: 0
@@ -5588,6 +5587,7 @@ MonoBehaviour:
   _progressBar: {fileID: 1530578980}
   _respawnButton: {fileID: 1839599976}
   _accelerationPedal: {fileID: 1794098609}
+  _brakePedal: {fileID: 1596999417}
   _finishInterface: {fileID: 308152106}
   _blackout: {fileID: 1976345895}
   _restartButton: {fileID: 805579706}
@@ -7684,7 +7684,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d01b9b60d85281b4fae1145df604b7ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _parallaxFactor: 0.2
 --- !u!1 &860009875
 GameObject:
   m_ObjectHideFlags: 0
@@ -8532,7 +8531,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d01b9b60d85281b4fae1145df604b7ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _parallaxFactor: 0.9
 --- !u!1001 &1018538858
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9666,7 +9664,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d01b9b60d85281b4fae1145df604b7ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _parallaxFactor: 0.1
 --- !u!4 &1174557081 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7484139257187846095, guid: c3f332ac4e970ef49b5ac976b65f39af, type: 3}
@@ -10129,7 +10126,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d01b9b60d85281b4fae1145df604b7ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _parallaxFactor: 0.8
 --- !u!1 &1196327733
 GameObject:
   m_ObjectHideFlags: 0
@@ -13645,11 +13641,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1596999413}
+  - component: {fileID: 1596999417}
   - component: {fileID: 1596999416}
   - component: {fileID: 1596999415}
   - component: {fileID: 1596999414}
   m_Layer: 5
-  m_Name: Brake
+  m_Name: BrakePedal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13757,6 +13754,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1596999412}
   m_CullTransparentMesh: 1
+--- !u!114 &1596999417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1596999412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ac93cd0617b45445a6b9cc2a9b7e177, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1619413801
 GameObject:
   m_ObjectHideFlags: 0
@@ -14327,7 +14336,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d01b9b60d85281b4fae1145df604b7ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _parallaxFactor: 0.3
 --- !u!1 &1625234030
 GameObject:
   m_ObjectHideFlags: 0
