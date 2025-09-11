@@ -1,14 +1,14 @@
-using UnityEngine;
+п»їusing UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class CarController : MonoBehaviour
 {
-    [Header("Suspensions / Подвески")]
+    [Header("Suspensions / РџРѕРґРІРµСЃРєРё")]
     [Space]
 
-    [SerializeField, Tooltip("Front suspension component / Компонент передней подвески")] private WheelJoint2D _frontSuspension;
-    [SerializeField, Tooltip("Back suspension component / Компонент задней подвески")] private WheelJoint2D _backSuspension;
+    [SerializeField, Tooltip("Front suspension component / РљРѕРјРїРѕРЅРµРЅС‚ РїРµСЂРµРґРЅРµР№ РїРѕРґРІРµСЃРєРё")] private WheelJoint2D _frontSuspension;
+    [SerializeField, Tooltip("Back suspension component / РљРѕРјРїРѕРЅРµРЅС‚ Р·Р°РґРЅРµР№ РїРѕРґРІРµСЃРєРё")] private WheelJoint2D _backSuspension;
 
     private float _mass = 10;
 
@@ -18,6 +18,7 @@ public class CarController : MonoBehaviour
 
     private float _brakeForce = 2f;
 
+    private float _airTorque = 20f;
     private float _airSlowEffect = 5f;
     private float _airBoostEffect = 12f;
 
@@ -27,12 +28,12 @@ public class CarController : MonoBehaviour
     private Rigidbody2D _rb;
     public Rigidbody2D GetRb => _rb;
 
-    public void Init(GroundCheck groundCheck, float mass, float engineMaxSpeed, float coastMaxSpeed, float acceleration, float brakeForce, float airSlowEffect, float airBoostEffect, float frontSuspensionStiffness, float backSuspensionStiffness)
+    public void Init(GroundCheck groundCheck, float mass, float engineMaxSpeed, float coastMaxSpeed, float acceleration, float brakeForce, float airTorque, float airSlowEffect, float airBoostEffect, float frontSuspensionStiffness, float backSuspensionStiffness)
     {
         _rb = GetComponent<Rigidbody2D>();
 
         // Main Settings
-        // Основные настройки
+        // РћСЃРЅРѕРІРЅС‹Рµ РЅР°СЃС‚СЂРѕР№РєРё
 
         _mass = mass;
         _rb.mass = _mass;
@@ -45,13 +46,14 @@ public class CarController : MonoBehaviour
         _brakeForce = brakeForce;
 
         // Air Speed
-        // Скорость в воздухе
+        // РЎРєРѕСЂРѕСЃС‚СЊ РІ РІРѕР·РґСѓС…Рµ
 
+        _airTorque = airTorque;
         _airSlowEffect = airSlowEffect;
         _airBoostEffect = airBoostEffect;
 
         // Suspension Settings
-        // Настройки подвески
+        // РќР°СЃС‚СЂРѕР№РєРё РїРѕРґРІРµСЃРєРё
 
         var frontSuspensionSettings = _frontSuspension.suspension;
         frontSuspensionSettings.frequency = frontSuspensionStiffness;
@@ -76,15 +78,24 @@ public class CarController : MonoBehaviour
 
     private void ApplyAirSpeedEffect()
     {
-        float tilt = transform.up.y;
+        _rb.angularVelocity = Mathf.MoveTowards(_rb.angularVelocity, 0f, _rb.angularDamping * Time.fixedDeltaTime);
 
+
+        if (_isWorkingEngine && !_isBraking) // If the engine is running, gently turn the machine forward. / Р•СЃР»Рё РґРІРёРіР°С‚РµР»СЊ СЂР°Р±РѕС‚Р°РµС‚, РїР»Р°РІРЅРѕ РїРѕРІРѕСЂР°С‡РёРІР°РµРј РјР°С€РёРЅРєСѓ РІРїРµСЂРµРґ.
+        {
+            _rb.AddTorque(-_airTorque * Time.fixedDeltaTime, ForceMode2D.Impulse);
+        }
+        else if (_isBraking) // If we press the brake, we can smoothly turn the car back. / Р•СЃР»Рё РјС‹ Р¶РјРµРј С‚РѕСЂРјРѕР·, РїР»Р°РІРЅРѕ РїРѕРІРѕСЂР°С‡РёРІР°РµРј РјР°С€РёРЅРєСѓ РЅР°Р·Р°Рґ.
+        {
+            _rb.AddTorque(_airTorque * Time.fixedDeltaTime, ForceMode2D.Impulse);
+        }
+
+        float tilt = transform.up.y;
         Vector2 newVelocity = _rb.linearVelocity;
 
         float airDrag = 2f;
         if (Mathf.Abs(newVelocity.x) > 0.01f)
-        {
             newVelocity.x -= Mathf.Sign(newVelocity.x) * airDrag * Time.fixedDeltaTime;
-        }
 
         if (tilt > 0f)
             newVelocity.x += -tilt * _airSlowEffect * Time.fixedDeltaTime;
@@ -95,13 +106,14 @@ public class CarController : MonoBehaviour
     }
 
 
+
     private void Move()
     {
         if (!_groundCheck.IsGround) return;
 
         Vector2 velocity = _rb.linearVelocity;
 
-        if (_isWorkingEngine && !_isBraking) // If the engine is running, push the car forward. / Если двигатель работает, толкаем машинку вперед.
+        if (_isWorkingEngine && !_isBraking) // If the engine is running, push the car forward. / Р•СЃР»Рё РґРІРёРіР°С‚РµР»СЊ СЂР°Р±РѕС‚Р°РµС‚, С‚РѕР»РєР°РµРј РјР°С€РёРЅРєСѓ РІРїРµСЂРµРґ.
         {
             float targetX = transform.right.x * _engineMaxSpeed;
 
@@ -112,14 +124,14 @@ public class CarController : MonoBehaviour
 
             velocity.x = Mathf.Clamp(velocity.x, -_engineMaxSpeed, _engineMaxSpeed);
         }
-        else if (_isBraking) // If we press the brake, we smoothly stop the car.. / Если мы жмем тормоз, плавно останавливаем машинку.
+        else if (_isBraking) // If we press the brake, we smoothly stop the car.. / Р•СЃР»Рё РјС‹ Р¶РјРµРј С‚РѕСЂРјРѕР·, РїР»Р°РІРЅРѕ РѕСЃС‚Р°РЅР°РІР»РёРІР°РµРј РјР°С€РёРЅРєСѓ.
         {
             velocity.x = Mathf.MoveTowards(velocity.x, 0f, _acceleration * _brakeForce * Time.fixedDeltaTime);
 
             if (Mathf.Abs(velocity.x) < 0.05f)
                 velocity.x = 0f;
         }
-        else // If the engine is not running, the car is traveling by inertia. / Если двигатель не работает, машинка едет по инерции.
+        else // If the engine is not running, the car is traveling by inertia. / Р•СЃР»Рё РґРІРёРіР°С‚РµР»СЊ РЅРµ СЂР°Р±РѕС‚Р°РµС‚, РјР°С€РёРЅРєР° РµРґРµС‚ РїРѕ РёРЅРµСЂС†РёРё.
         {
             float max = _coastMaxSpeed;
             velocity.x = Mathf.MoveTowards(velocity.x, Mathf.Clamp(velocity.x, -max, max), _acceleration * Time.fixedDeltaTime);

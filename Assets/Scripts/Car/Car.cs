@@ -30,7 +30,7 @@ public class Car : MonoBehaviour
 
         _carController = GetComponentInChildren<CarController>();
         _carParticleController = _carController.GetComponent<CarParticleController>();
-        _carController.Init(_groundCheck, _carSettings.Mass, _carSettings.EngineMaxSpeed, _carSettings.CoastMaxSpeed, _carSettings.Acceleration, _carSettings.BrakeForce, _carSettings.AirSlowEffect, _carSettings.AirBoostEffect, _carSettings.FrontSuspensionStiffness, _carSettings.BackSuspensionStiffness);
+        _carController.Init(_groundCheck, _carSettings.Mass, _carSettings.EngineMaxSpeed, _carSettings.CoastMaxSpeed, _carSettings.Acceleration, _carSettings.BrakeForce, _carSettings.AirTorque, _carSettings.AirSlowEffect, _carSettings.AirBoostEffect, _carSettings.FrontSuspensionStiffness, _carSettings.BackSuspensionStiffness);
 
         // Car Particle Controller Initialization
         // Инициализация контроллера парртиклов машинки

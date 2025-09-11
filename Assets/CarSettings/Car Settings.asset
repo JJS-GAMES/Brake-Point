@@ -21,6 +21,7 @@ MonoBehaviour:
   BrakeForce: 2
   CarPhysicsMaterial: {fileID: 6200000, guid: d0e6e03167fe7984cafc62378b1042e2, type: 2}
   Friction: 0.6
+  AirTorque: 20
   AirSlowEffect: 3
   AirBoostEffect: 7
   FrontSuspensionStiffness: 8

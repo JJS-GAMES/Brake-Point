@@ -34,6 +34,8 @@ public class CarSettings : ScriptableObject
 
     [Header("Air Speed Effect / Настройки скорости в воздухе")]
 
+    [Range(5f, 100f), Tooltip("The force of rotation of the machine in the air / Сила вращения машины в воздухе")]
+    public float AirTorque = 20f;
     [Tooltip("Deceleration of speed during ascent (when the car is flying up) / Замедление скорости при подъёме (когда машина летит вверх)")]
     public float AirSlowEffect = 3f;
     [Tooltip("Acceleration of speed during descent (when the car is flying down) / Ускорение скорости при спуске (когда машина летит вниз)")]
