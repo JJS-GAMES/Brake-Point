@@ -17,7 +17,10 @@ public class Car : MonoBehaviour
 
     private CarController _carController;
     private CarParticleController _carParticleController;
+    private CarEngineSoundController _carEngineSoundController;
+    public GroundCheck GetGroundCheck => _groundCheck;
     public CarController GetCarController => _carController;
+    public CarSettings GetCarSettings => _carSettings;
     private void Awake() // ¬ременно в Update дл€ эскперементов, в будущем ќЅя«ј“≈Ћ№Ќќ вернуть в Awake!
     {
         // Physics Settings Initialization
@@ -29,13 +32,19 @@ public class Car : MonoBehaviour
         // »нициализаци€ контроллера машинки
 
         _carController = GetComponentInChildren<CarController>();
-        _carParticleController = _carController.GetComponent<CarParticleController>();
-        _carController.Init(_groundCheck, _carSettings.Mass, _carSettings.EngineMaxSpeed, _carSettings.CoastMaxSpeed, _carSettings.Acceleration, _carSettings.BrakeForce, _carSettings.AirTorque, _carSettings.AirSlowEffect, _carSettings.AirBoostEffect, _carSettings.FrontSuspensionStiffness, _carSettings.BackSuspensionStiffness);
+        _carController?.Init(_groundCheck, _carSettings.Mass, _carSettings.EngineMaxSpeed, _carSettings.CoastMaxSpeed, _carSettings.Acceleration, _carSettings.BrakeForce, _carSettings.AirTorque, _carSettings.AirSlowEffect, _carSettings.AirBoostEffect, _carSettings.FrontSuspensionStiffness, _carSettings.BackSuspensionStiffness);
+
+        // Engine Sound Controller Initialization
+        // »нициализаци€ контроллера звука двигател€
+
+        _carEngineSoundController = _carController.GetComponent<CarEngineSoundController>();
+        _carEngineSoundController?.Init(this, _carSettings.EngineSoundClip, _carSettings.MinPitch, _carSettings.GroundMaxPitch, _carSettings.AirMaxPitch, _carSettings.GroundPitchSmooth, _carSettings.AirPitchSmooth);
 
         // Car Particle Controller Initialization
         // »нициализаци€ контроллера парртиклов машинки
 
-        _carParticleController.Init(_carController, _groundCheck, _carSettings.DecaySpeed, _carSettings.RestoreSpeed, _carSettings.MinSpeedToEmit);
+        _carParticleController = _carController?.GetComponent<CarParticleController>();
+        _carParticleController?.Init(_carController, _groundCheck, _carSettings.DecaySpeed, _carSettings.RestoreSpeed, _carSettings.MinSpeedToEmit);
     }
 
     private void FixedUpdate()

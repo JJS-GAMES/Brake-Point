@@ -27,6 +27,8 @@ public class CarController : MonoBehaviour
     private GroundCheck _groundCheck;
     private Rigidbody2D _rb;
     public Rigidbody2D GetRb => _rb;
+    public bool GetIsWorkingEngine => _isWorkingEngine;
+    public bool GetIsBraking => _isBraking;
 
     public void Init(GroundCheck groundCheck, float mass, float engineMaxSpeed, float coastMaxSpeed, float acceleration, float brakeForce, float airTorque, float airSlowEffect, float airBoostEffect, float frontSuspensionStiffness, float backSuspensionStiffness)
     {

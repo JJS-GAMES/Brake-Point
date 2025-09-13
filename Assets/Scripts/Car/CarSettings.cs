@@ -10,6 +10,8 @@ public class CarSettings : ScriptableObject
     [Tooltip("Camera offset relative to the car / Смещение камеры относительно машины")]
     public Vector3 Offset = new Vector3(5, 3, 10);
 
+    [Space, Header("----------------------------"), Space]
+
     [Header("Main Settings / Основные настройки")]
 
     [Tooltip("Car mass (kg) / Масса машины (кг)")]
@@ -24,6 +26,8 @@ public class CarSettings : ScriptableObject
     public float BrakeForce = 2f;
 
     [Space]
+
+    [Space, Header("----------------------------"), Space]
 
     [Header("Physics Settings / Настройки физики")]
 
@@ -41,19 +45,41 @@ public class CarSettings : ScriptableObject
     [Tooltip("Acceleration of speed during descent (when the car is flying down) / Ускорение скорости при спуске (когда машина летит вниз)")]
     public float AirBoostEffect = 7f;
 
+    [Space, Header("----------------------------"), Space]
+
     [Space, Header("Suspension Settings / Настройки подвески")]
     [Range(3f, 12f), Tooltip("Stiffness of the front suspension (range 3-12) / Жесткость передней подвески (диапазон 3–12)")]
     public float FrontSuspensionStiffness = 8f;
     [Range(3f, 12f), Tooltip("Stiffness of the back suspension (range 3-12) / Жесткость задней подвески (диапазон 3–12)")]
     public float BackSuspensionStiffness = 8f;
 
-    [Header("Particle Settings / Настройки партиклов")]
+    [Space, Header("----------------------------"), Space]
+
+    [Space, Header("Particle Settings / Настройки партиклов")]
     [Range(1f, 20f), Tooltip("Fade-out speed of particles when car is airborne / Скорость исчезновения частиц, когда машина в воздухе")]
     public float DecaySpeed = 20f;
-
     [Range(1f, 20f), Tooltip("Fade-in speed of particles when car lands / Скорость восстановления частиц, когда машина снова касается земли")]
     public float RestoreSpeed = 10f;
-
     [Tooltip("Minimum car speed required to emit particles / Минимальная скорость машины, при которой начинают воспроизводиться частицы")]
     public float MinSpeedToEmit = 0.1f;
+
+    [Space, Header("----------------------------"), Space]
+
+    [Space, Header("Engine Sound Settings / Настройки звука двигателя")]
+    [Tooltip("Звук двигателя / Engine Sound")]
+    public AudioClip EngineSoundClip;
+
+    [Header("Pitch Settings / Настройки тона двигателя")]
+    [Tooltip("Базовый тон двигателя при минимальной скорости / Lowest engine pitch when car is idle or very slow")]
+    public float MinPitch = 0.5f;
+    [Tooltip("Максимальный тон двигателя на земле (зависит от скорости) / Max engine pitch on ground, scales with speed")]
+    public float GroundMaxPitch = 2f;
+    [Tooltip("Максимальный тон двигателя в воздухе (имитация прокручивания колес) / Max engine pitch in air when wheels spin freely")]
+    public float AirMaxPitch = 2.5f;
+
+    [Header("Smoothing Settings / Настройки сглаживания звуков")]
+    [Range(1f, 15f), Tooltip("Скорость сглаживания изменения звука на земле (чем больше = тем быстрее) / Pitch transition smoothness on ground")]
+    public float GroundPitchSmooth = 5f;
+    [Range(1f, 15f), Tooltip("Скорость сглаживания изменения звука в воздухе (чем больше = тем быстрее) / Pitch transition smoothness in air")]
+    public float AirPitchSmooth = 10f;
 }
