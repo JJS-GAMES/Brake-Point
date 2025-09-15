@@ -7980,10 +7980,6 @@ PrefabInstance:
       value: FinishZone
       objectReference: {fileID: 0}
     - target: {fileID: 5544870848922832999, guid: de9fdce99bbf2c14c963359734c6acfe, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 11.184004
-      objectReference: {fileID: 0}
-    - target: {fileID: 5544870848922832999, guid: de9fdce99bbf2c14c963359734c6acfe, type: 3}
       propertyPath: m_LocalPosition.x
       value: 509.7
       objectReference: {fileID: 0}
@@ -8022,10 +8018,6 @@ PrefabInstance:
     - target: {fileID: 5544870848922832999, guid: de9fdce99bbf2c14c963359734c6acfe, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8470848644175284989, guid: de9fdce99bbf2c14c963359734c6acfe, type: 3}
-      propertyPath: m_SortingOrder
-      value: -1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -29136,34 +29128,6 @@ PrefabInstance:
     - target: {fileID: 6998381053576339227, guid: 4108557c3c7524c49acbed9d267425f1, type: 3}
       propertyPath: m_Name
       value: Car_2107
-      objectReference: {fileID: 0}
-    - target: {fileID: 8081807531610935578, guid: 4108557c3c7524c49acbed9d267425f1, type: 3}
-      propertyPath: m_Size.x
-      value: 0.98
-      objectReference: {fileID: 0}
-    - target: {fileID: 8081807531610935578, guid: 4108557c3c7524c49acbed9d267425f1, type: 3}
-      propertyPath: m_Size.y
-      value: 0.31
-      objectReference: {fileID: 0}
-    - target: {fileID: 8081807531610935578, guid: 4108557c3c7524c49acbed9d267425f1, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: -7986009452527528468, guid: 2930e58098254134ca6151cfe93a8793, type: 3}
-    - target: {fileID: 8081807531610935578, guid: 4108557c3c7524c49acbed9d267425f1, type: 3}
-      propertyPath: m_WasSpriteAssigned
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8370055430678120321, guid: 4108557c3c7524c49acbed9d267425f1, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8370055430678120321, guid: 4108557c3c7524c49acbed9d267425f1, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8370055430678120321, guid: 4108557c3c7524c49acbed9d267425f1, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
