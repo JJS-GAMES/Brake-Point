@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 36b6de6dea9298a49967b4b1d1d1b1e7
+guid: 2930e58098254134ca6151cfe93a8793
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5608174607081046103
-    second: "\u041A\u0443\u0437\u043E\u0432_0"
+      213: -7986009452527528468
+    second: Car_2107_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -98,7 +98,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
     buildTarget: Android
-    maxTextureSize: 128
+    maxTextureSize: 1024
     resizeAlgorithm: 0
     textureFormat: 47
     textureCompression: 1
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "\u041A\u0443\u0437\u043E\u0432_0"
+      name: Car_2107_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 109
-        height: 51
+        width: 98
+        height: 31
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9af719288e2cb22b0800000000000000
-      internalID: -5608174607081046103
+      spriteID: ce55f21f6befb2190800000000000000
+      internalID: -7986009452527528468
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      "\u041A\u0443\u0437\u043E\u0432_0": -5608174607081046103
+      Car_2107_0: -7986009452527528468
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

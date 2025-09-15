@@ -9858,7 +9858,7 @@ GameObject:
   - component: {fileID: 2131145241558458569}
   - component: {fileID: 1307651422265941703}
   m_Layer: 6
-  m_Name: Car
+  m_Name: Car_Buhanka
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
