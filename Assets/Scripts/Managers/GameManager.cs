@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        _uiManager.Init(this, _car);
+
         // We calculate and save the total distance between start and finish
         // Считаем и сохраняем общее расстояние между стартом и финишем
 

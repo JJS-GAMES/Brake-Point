@@ -5,9 +5,6 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] private GameManager _gameManager;
-    [SerializeField] private Car _carScript;
-    [Space]
     [Header("UI Elements / UI Ёлементы")]
     [Header("Base Interface")]
     [SerializeField] private GameObject _baseInterface;
@@ -25,12 +22,17 @@ public class UIManager : MonoBehaviour
     [Space, SerializeField] private Image _blackout;
     [SerializeField] private Button _restartButton;
 
+    private GameManager _gameManager;
+    private Car _carScript;
     private CanvasGroup _blackoutCanvasGroup;
     private bool _isFinishUIActive = false;
 
-    private void Start()
+    public void Init(GameManager gameManager, Car carScript)
     {
-        // Base Interface Initialization
+        _carScript = carScript;
+        _gameManager = gameManager;
+
+        // Base Interface Initialization / »нициализаци€ базового интерфейса
         _respawnButton?.onClick.RemoveAllListeners();
         _respawnButton?.onClick.AddListener(_gameManager.RestartLevel);
 
@@ -43,7 +45,7 @@ public class UIManager : MonoBehaviour
         _accelerationPedal?.Init(_carScript.GetCarController);
         _brakePedal?.Init(_carScript.GetCarController);
 
-        // Finish UI Initialization
+        // Finish UI Initialization / »нциализаци€ финишного интерфейса
         _restartButton?.onClick.RemoveAllListeners();
         _restartButton?.onClick.AddListener(_gameManager.RestartLevel);
 
