@@ -8433,8 +8433,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4879756d5ea8845489d226940f7f486c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameManager: {fileID: 1022508382}
-  _carScript: {fileID: 1307651422292413008}
   _baseInterface: {fileID: 801406965}
   _carSpeed: {fileID: 466187886}
   _progressBar: {fileID: 1530578980}
@@ -29085,6 +29083,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3394201099975226755, guid: 4108557c3c7524c49acbed9d267425f1, type: 3}
+      propertyPath: m_Size.y
+      value: 0.5915544
+      objectReference: {fileID: 0}
+    - target: {fileID: 3394201099975226755, guid: 4108557c3c7524c49acbed9d267425f1, type: 3}
+      propertyPath: m_Offset.y
+      value: -1.170775
+      objectReference: {fileID: 0}
     - target: {fileID: 5103805921916859953, guid: 4108557c3c7524c49acbed9d267425f1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -30
