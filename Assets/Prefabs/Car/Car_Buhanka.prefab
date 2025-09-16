@@ -10262,8 +10262,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acceb49ab9574664bb8f570246c431f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _frontSuspension: {fileID: 4217650077420380116}
-  _backSuspension: {fileID: 1549760328077751342}
+  _frontSuspensionWheelJoint: {fileID: 4217650077420380116}
+  _backSuspensionWheelJoint: {fileID: 1549760328077751342}
 --- !u!114 &3792070507787781717
 MonoBehaviour:
   m_ObjectHideFlags: 0

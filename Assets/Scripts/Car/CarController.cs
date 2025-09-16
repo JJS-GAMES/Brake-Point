@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class CarController : MonoBehaviour
@@ -7,8 +6,8 @@ public class CarController : MonoBehaviour
     [Header("Suspensions / Подвески")]
     [Space]
 
-    [SerializeField, Tooltip("Front suspension component / Компонент передней подвески")] private WheelJoint2D _frontSuspension;
-    [SerializeField, Tooltip("Back suspension component / Компонент задней подвески")] private WheelJoint2D _backSuspension;
+    [Space, SerializeField, Tooltip("Front suspension component / Компонент передней подвески")] private WheelJoint2D _frontSuspensionWheelJoint;
+    [SerializeField, Tooltip("Back suspension component / Компонент задней подвески")] private WheelJoint2D _backSuspensionWheelJoint;
 
     private float _mass = 10;
 
@@ -57,13 +56,15 @@ public class CarController : MonoBehaviour
         // Suspension Settings
         // Настройки подвески
 
-        var frontSuspensionSettings = _frontSuspension.suspension;
+        var frontSuspensionSettings = _frontSuspensionWheelJoint.suspension;
         frontSuspensionSettings.frequency = frontSuspensionStiffness;
-        _frontSuspension.suspension = frontSuspensionSettings;
+        _frontSuspensionWheelJoint.suspension = frontSuspensionSettings;
+        _frontSuspensionWheelJoint.anchor = _frontSuspensionWheelJoint.connectedBody.transform.parent.localPosition;
 
-        var backSuspensionSettings = _backSuspension.suspension;
+        var backSuspensionSettings = _backSuspensionWheelJoint.suspension;
         backSuspensionSettings.frequency = backSuspensionStiffness;
-        _backSuspension.suspension = backSuspensionSettings;
+        _backSuspensionWheelJoint.suspension = backSuspensionSettings;
+        _backSuspensionWheelJoint.anchor = _backSuspensionWheelJoint.connectedBody.transform.parent.localPosition;
     }
 
     private void FixedUpdate()
