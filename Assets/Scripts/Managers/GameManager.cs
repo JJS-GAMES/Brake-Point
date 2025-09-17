@@ -15,6 +15,9 @@ public class GameManager : MonoBehaviour
     [SerializeField, Tooltip("Prefab of the finish area on the stage / Префаб финишной зоны на сцене")] 
     private FinishZone _finishZone;
 
+    [Header("Development")]
+    [SerializeField] private Camera _devCamera;
+
     private Transform _finishZoneTransform;
 
     private float _totalDistance;
@@ -65,6 +68,7 @@ public class GameManager : MonoBehaviour
             car.transform.position = new Vector2(0, 0);
         }
 
+        _devCamera?.gameObject.SetActive(false);
         _uiManager.CarUIInitialization(_carScript);
         _finishZone.Init(_carScript, _uiManager);
     }

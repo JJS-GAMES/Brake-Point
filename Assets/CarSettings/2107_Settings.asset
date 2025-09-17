@@ -28,7 +28,7 @@ MonoBehaviour:
   BackSuspensionStiffness: 7
   DecaySpeed: 20
   RestoreSpeed: 10
-  MinSpeedToEmit: 0.1
+  MinSpeedToEmit: 5
   EngineSoundClip: {fileID: 8300000, guid: c51eb7b42bb0da8458ec10d632933cd0, type: 3}
   MinPitch: 0.5
   GroundMaxPitch: 2

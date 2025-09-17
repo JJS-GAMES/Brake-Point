@@ -454,6 +454,8 @@ MonoBehaviour:
       m_LigatureGlyphID: 1138
     - m_ComponentGlyphIDs: 3d000000aa000000
       m_LigatureGlyphID: 1140
+    - m_ComponentGlyphIDs: 4b000000a9000000
+      m_LigatureGlyphID: 1174
     m_GlyphPairAdjustmentRecords:
     - m_FirstAdjustmentRecord:
         m_GlyphIndex: 4
