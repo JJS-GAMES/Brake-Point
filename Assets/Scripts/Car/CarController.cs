@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class CarController : MonoBehaviour
@@ -28,6 +29,8 @@ public class CarController : MonoBehaviour
     public Rigidbody2D GetRb => _rb;
     public bool GetIsWorkingEngine => _isWorkingEngine;
     public bool GetIsBraking => _isBraking;
+
+    public event Action<float> OnSpeedChanged;
 
     public void Init(GroundCheck groundCheck, float mass, float engineMaxSpeed, float coastMaxSpeed, float acceleration, float brakeForce, float airTorque, float airSlowEffect, float airBoostEffect, float frontSuspensionStiffness, float backSuspensionStiffness)
     {
@@ -112,6 +115,8 @@ public class CarController : MonoBehaviour
 
     private void Move()
     {
+        OnSpeedChanged?.Invoke(_rb.linearVelocity.magnitude);
+
         if (!_groundCheck.IsGround) return;
 
         Vector2 velocity = _rb.linearVelocity;

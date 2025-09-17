@@ -11,10 +11,15 @@ public class UIManager : MonoBehaviour
 
     [Space, SerializeField] private TextMeshProUGUI _carSpeed;
     [SerializeField] private Scrollbar _progressBar;
+    private ProgressTracker _progressTracker;
     [SerializeField] private Button _respawnButton;
 
     [Space, SerializeField] private AccelerationPedal _accelerationPedal;
     [SerializeField] private BrakePedal _brakePedal;
+
+    [Header("Start UI")]
+    [SerializeField] private GameObject _startInterface;
+    [SerializeField] private Button[] _selectCarButtons;
 
     [Header("Finish UI")]
     [SerializeField] private GameObject _finishInterface;
@@ -28,14 +33,18 @@ public class UIManager : MonoBehaviour
     private CanvasGroup _blackoutCanvasGroup;
     private bool _isFinishUIActive = false;
 
-    public void Init(GameManager gameManager, Car carScript)
+    public void Init(GameManager gameManager)
     {
-        _carScript = carScript;
         _gameManager = gameManager;
+
+
+        ToggleUI(true, false, false);
 
         // Base Interface Initialization / Инициализация базового интерфейса
         _respawnButton?.onClick.RemoveAllListeners();
         _respawnButton?.onClick.AddListener(_gameManager.RestartLevel);
+        _progressTracker = _progressBar.GetComponent<ProgressTracker>();
+        _progressTracker.Init(_gameManager);
 
         _blackoutCanvasGroup = _blackout.GetComponent<CanvasGroup>();
         if (_blackoutCanvasGroup == null)
@@ -43,31 +52,64 @@ public class UIManager : MonoBehaviour
             _blackoutCanvasGroup = _blackout.gameObject.AddComponent<CanvasGroup>();
         }
 
-        _accelerationPedal?.Init(_carScript.GetCarController);
-        _brakePedal?.Init(_carScript.GetCarController);
+        // Start UI Initialization / Инциализация стартового интерфейса
+
+        foreach (var b in _selectCarButtons)
+        {
+            var btn = b;
+            btn.onClick.RemoveAllListeners();
+            btn.onClick.AddListener(() =>
+                _gameManager.CarInitialization(btn.GetComponent<SelectCarButton>().GetCarPrefab));
+            btn.onClick.AddListener(() => ToggleUI(false, true, false));
+        }
 
         // Finish UI Initialization / Инциализация финишного интерфейса
         _restartButton?.onClick.RemoveAllListeners();
         _restartButton?.onClick.AddListener(_gameManager.RestartLevel);
         _restartButtonTransform = _restartButton?.transform;
-        ToggleFinishUI(false, true);
     }
 
-    private void LateUpdate()
+
+    public void CarUIInitialization(Car carScript)
     {
-        UpdateUI();
+        _carScript = carScript;
+        var controller = _carScript.GetCarController;
+
+        controller.OnSpeedChanged += UpdateSpeedText;
+        _gameManager.OnProgressChanged += UpdateProgressBarUI;
+
+        _accelerationPedal?.Init(controller);
+        _brakePedal?.Init(controller);
     }
 
-    private void UpdateUI()
+    public void UnsubscribeFromCar(Car car)
+    {
+        if (car == null) return;
+        var controller = car.GetCarController;
+        if (controller == null) return;
+
+        controller.OnSpeedChanged -= UpdateSpeedText;
+        _gameManager.OnProgressChanged -= UpdateProgressBarUI;
+    }
+
+    private void ToggleUI(bool startInterface, bool baseInterface, bool finishInterface)
+    {
+        _startInterface?.gameObject.SetActive(startInterface);
+        _baseInterface?.gameObject.SetActive(baseInterface);
+        _finishInterface?.gameObject.SetActive(finishInterface);
+    }
+    private void UpdateProgressBarUI(float progress)
+    {
+        if (_gameManager != null && _carScript != null)
+        {
+            _progressBar.size = progress;
+        }
+    }
+    private void UpdateSpeedText(float speed)
     {
         if (_carScript != null && _carScript.GetCarController != null)
         {
-            _carSpeed.text = $"Speed: {Mathf.RoundToInt(_carScript.GetCarController.GetRb.linearVelocity.magnitude)} km/h";
-        }
-
-        if (_gameManager != null)
-        {
-            _progressBar.size = _gameManager.CalculateLevelProgress();
+            _carSpeed.text = $"Speed: {Mathf.RoundToInt(speed)} km/h";
         }
     }
 
@@ -81,8 +123,7 @@ public class UIManager : MonoBehaviour
 
         if (toggle)
         {
-            _baseInterface.gameObject.SetActive(false);
-            _finishInterface?.gameObject.SetActive(true);
+            ToggleUI(false, false, true);
 
             _blackoutCanvasGroup?.gameObject.SetActive(true);
             _restartButton?.gameObject.SetActive(true);
@@ -121,8 +162,7 @@ public class UIManager : MonoBehaviour
                     .SetEase(Ease.InBack)
                     .OnComplete(() => _restartButton.gameObject.SetActive(false));
 
-                _finishInterface?.gameObject.SetActive(false);
-                _baseInterface?.gameObject.SetActive(true);
+                ToggleUI(false, true, false);
             }
         }
     }

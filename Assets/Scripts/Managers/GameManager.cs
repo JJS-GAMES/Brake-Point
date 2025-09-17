@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -5,33 +6,29 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private UIManager _uiManager; // Temporary initialization in the inspector / Временно инициализация в инспекторе
 
-    [SerializeField,Tooltip("Player car / Машина игрока")] 
-    private Car _car;
+    [SerializeField] private GameObject _carPrefab;
+    private Car _carScript;
 
     [Header("Zones / Зоны")]
-    [Space, SerializeField, Tooltip("Prefab of the start area on the stage / Префаб стартовой зоны на сцене")]
-    private GameObject _startZone;
+    [Space, SerializeField, Tooltip("Position of the spawn on the stage / Позиция спавна на сцене")]
+    private Transform _spawnPosition;
     [SerializeField, Tooltip("Prefab of the finish area on the stage / Префаб финишной зоны на сцене")] 
     private FinishZone _finishZone;
 
-    private Transform _startZoneTransform;
     private Transform _finishZoneTransform;
 
     private float _totalDistance;
 
+    public event Action<float> OnProgressChanged;
+    private float _lastProgress;
+
     private void Start()
     {
-        _uiManager.Init(this, _car);
-
-        _startZoneTransform = _startZone.transform;
         _finishZoneTransform = _finishZone.transform;
 
-        // We calculate and save the total distance between start and finish
-        // Считаем и сохраняем общее расстояние между стартом и финишем
+        _totalDistance = Vector2.Distance(_spawnPosition.position, _finishZoneTransform.position);
 
-        _totalDistance = Vector2.Distance(_startZoneTransform.position, _finishZoneTransform.position);
-
-        _finishZone.Init(_car, _uiManager);
+        _uiManager.Init(this);
     }
 
     public void RestartLevel()
@@ -40,12 +37,44 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(currentScene.buildIndex);
     }
 
+    private void FixedUpdate()
+    {
+        if (_carScript == null) return;
+
+        float progress = CalculateLevelProgress();
+        if (!Mathf.Approximately(progress, _lastProgress))
+        {
+            _lastProgress = progress;
+            OnProgressChanged?.Invoke(progress);
+        }
+    }
+    public void CarInitialization(GameObject carPrefab)
+    {
+        if (_carScript != null)
+            _uiManager?.UnsubscribeFromCar(_carScript);
+
+        _carPrefab = carPrefab;
+
+        GameObject car = Instantiate(_carPrefab);
+        _carScript = car.GetComponent<Car>();
+
+        if (_spawnPosition != null) car.transform.position = _spawnPosition.position;
+        else
+        {
+            Debug.LogWarning("Spawn Position - not inittialized! Using default position.");
+            car.transform.position = new Vector2(0, 0);
+        }
+
+        _uiManager.CarUIInitialization(_carScript);
+        _finishZone.Init(_carScript, _uiManager);
+    }
+
     public float CalculateLevelProgress()
     {
         // We count how much the car has traveled
         // Считаем, сколько проехала машина
 
-        float carDistance = Vector2.Distance(_startZoneTransform.position, _car.Target.transform.position);
+        float carDistance = Vector2.Distance(_spawnPosition.position, _carScript.Target.transform.position);
 
         float progress = Mathf.Clamp01(carDistance / _totalDistance);
 
