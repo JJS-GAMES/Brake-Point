@@ -5,10 +5,9 @@ public class FinishZone : MonoBehaviour
 {
     [SerializeField, Tooltip("If the car's speed is equal to or below this value, then a successful finish is counted. / Если скорость машинки равна или ниже этого значения, то засчитывается успешный финиш")]
     private float _finishSpeedThreshold = 2f;
-
-
-    private Car _car;
+    
     private BoxCollider2D _boxCollider;
+    private Car _car;
     private UIManager _uiManager;
 
     public void Init(Car car, UIManager uiManager)
@@ -28,7 +27,6 @@ public class FinishZone : MonoBehaviour
         {
             if (Mathf.RoundToInt(_car.GetCarController.GetRb.linearVelocity.magnitude) <= _finishSpeedThreshold)
             {
-                Debug.Log("Машинка замедлилась в зоне финиша");
                 _uiManager?.ToggleFinishUI(true);
             }
         }

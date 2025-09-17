@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _finishSpeedThreshold: 2
+  _boxCollider: {fileID: 2518280123465777649}
 --- !u!61 &2518280123465777649
 BoxCollider2D:
   m_ObjectHideFlags: 0

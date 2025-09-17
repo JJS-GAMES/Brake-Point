@@ -21,6 +21,7 @@ public class UIManager : MonoBehaviour
 
     [Space, SerializeField] private Image _blackout;
     [SerializeField] private Button _restartButton;
+    private Transform _restartButtonTransform;
 
     private GameManager _gameManager;
     private Car _carScript;
@@ -48,7 +49,7 @@ public class UIManager : MonoBehaviour
         // Finish UI Initialization / Инциализация финишного интерфейса
         _restartButton?.onClick.RemoveAllListeners();
         _restartButton?.onClick.AddListener(_gameManager.RestartLevel);
-
+        _restartButtonTransform = _restartButton?.transform;
         ToggleFinishUI(false, true);
     }
 
@@ -76,7 +77,7 @@ public class UIManager : MonoBehaviour
         _isFinishUIActive = toggle;
 
         _blackoutCanvasGroup.DOKill();
-        _restartButton.transform.DOKill();
+        _restartButtonTransform.DOKill();
 
         if (toggle)
         {
@@ -89,15 +90,15 @@ public class UIManager : MonoBehaviour
             if (instant)
             {
                 _blackoutCanvasGroup.alpha = 1f;
-                _restartButton.transform.localScale = Vector3.one;
+                _restartButtonTransform.localScale = Vector3.one;
             }
             else
             {
                 _blackoutCanvasGroup.alpha = 0f;
-                _restartButton.transform.localScale = Vector3.zero;
+                _restartButtonTransform.localScale = Vector3.zero;
 
                 _blackoutCanvasGroup?.DOFade(1f, 0.1f).SetEase(Ease.InOutQuad);
-                _restartButton?.transform.DOScale(1f, 0.6f).SetEase(Ease.OutBack);
+                _restartButtonTransform.DOScale(1f, 0.6f).SetEase(Ease.OutBack);
             }
         }
         else
@@ -107,7 +108,7 @@ public class UIManager : MonoBehaviour
                 _blackoutCanvasGroup.alpha = 0f;
                 _blackoutCanvasGroup?.gameObject.SetActive(false);
 
-                _restartButton.transform.localScale = Vector3.zero;
+                _restartButtonTransform.localScale = Vector3.zero;
                 _restartButton?.gameObject.SetActive(false);
             }
             else
@@ -116,7 +117,7 @@ public class UIManager : MonoBehaviour
                     .SetEase(Ease.InOutQuad)
                     .OnComplete(() => _blackoutCanvasGroup.gameObject.SetActive(false));
 
-                _restartButton?.transform.DOScale(0f, 0.4f)
+                _restartButtonTransform.DOScale(0f, 0.4f)
                     .SetEase(Ease.InBack)
                     .OnComplete(() => _restartButton.gameObject.SetActive(false));
 

@@ -30,7 +30,7 @@ public class CarEngineSoundController : MonoBehaviour
 
         // Инициализация проигрывателя / Audio Source Initialization
 
-        _audioSource = GetComponent<AudioSource>();
+        if(_audioSource == null) _audioSource = GetComponent<AudioSource>();
 
         _audioSource.clip = _engineSoundClip;
         _audioSource.loop = true;
