@@ -6,28 +6,33 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     [Header("UI Elements / UI Ёлементы")]
+    [SerializeField] private Canvas _baseInterface;
+    [SerializeField] private Canvas _finishInterface;
+
     [Header("Base Interface")]
-    [SerializeField] private GameObject _baseInterface;
 
     [Space, SerializeField] private TextMeshProUGUI _carSpeed;
     [SerializeField] private Scrollbar _progressBar;
-    private ProgressTracker _progressTracker;
     [SerializeField] private Button _respawnButton;
+    [SerializeField] private Button _returnMainMenuButton;
 
     [Space, SerializeField] private AccelerationPedal _accelerationPedal;
     [SerializeField] private BrakePedal _brakePedal;
 
     [Header("Finish UI")]
-    [SerializeField] private GameObject _finishInterface;
-
     [Space, SerializeField] private Image _blackout;
     [SerializeField] private Button _restartButton;
+
     private Transform _restartButtonTransform;
+
+    private ProgressTracker _progressTracker;
 
     private LevelManager _levelManager;
     private GameManager _gameManager;
+
     private Car _carScript;
     private CanvasGroup _blackoutCanvasGroup;
+
     private bool _isFinishUIActive = false;
 
     public void Init(GameManager gameManager, LevelManager levelManager)
@@ -48,6 +53,9 @@ public class UIManager : MonoBehaviour
         {
             _blackoutCanvasGroup = _blackout.gameObject.AddComponent<CanvasGroup>();
         }
+
+        _returnMainMenuButton?.onClick.RemoveAllListeners();
+        _returnMainMenuButton?.onClick.AddListener(() => _levelManager.Load(0));
 
         // Finish UI Initialization / »нциализаци€ финишного интерфейса
         _restartButton?.onClick.RemoveAllListeners();
