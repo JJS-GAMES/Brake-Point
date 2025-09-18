@@ -5,8 +5,8 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private UIManager _uiManager; // Temporary initialization in the inspector / Временно инициализация в инспекторе
-
-    [SerializeField] private GameObject _carPrefab;
+    [SerializeField] private LevelManager _levelManager;
+    [SerializeField] private GameData _gameData;
     private Car _carScript;
 
     [Header("Zones / Зоны")]
@@ -25,19 +25,18 @@ public class GameManager : MonoBehaviour
     public event Action<float> OnProgressChanged;
     private float _lastProgress;
 
+    private void Awake()
+    {
+        _uiManager.Init(this, _levelManager);
+    }
     private void Start()
     {
         _finishZoneTransform = _finishZone.transform;
 
         _totalDistance = Vector2.Distance(_spawnPosition.position, _finishZoneTransform.position);
 
-        _uiManager.Init(this);
-    }
 
-    public void RestartLevel()
-    {
-        Scene currentScene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(currentScene.buildIndex);
+        CarInitialization();
     }
 
     private void FixedUpdate()
@@ -51,14 +50,12 @@ public class GameManager : MonoBehaviour
             OnProgressChanged?.Invoke(progress);
         }
     }
-    public void CarInitialization(GameObject carPrefab)
+    public void CarInitialization()
     {
         if (_carScript != null)
             _uiManager?.UnsubscribeFromCar(_carScript);
 
-        _carPrefab = carPrefab;
-
-        GameObject car = Instantiate(_carPrefab);
+        GameObject car = Instantiate(_gameData.CarPrefab);
         _carScript = car.GetComponent<Car>();
 
         if (_spawnPosition != null) car.transform.position = _spawnPosition.position;

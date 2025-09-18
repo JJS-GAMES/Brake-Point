@@ -17,10 +17,6 @@ public class UIManager : MonoBehaviour
     [Space, SerializeField] private AccelerationPedal _accelerationPedal;
     [SerializeField] private BrakePedal _brakePedal;
 
-    [Header("Start UI")]
-    [SerializeField] private GameObject _startInterface;
-    [SerializeField] private Button[] _selectCarButtons;
-
     [Header("Finish UI")]
     [SerializeField] private GameObject _finishInterface;
 
@@ -28,23 +24,24 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Button _restartButton;
     private Transform _restartButtonTransform;
 
+    private LevelManager _levelManager;
     private GameManager _gameManager;
     private Car _carScript;
     private CanvasGroup _blackoutCanvasGroup;
     private bool _isFinishUIActive = false;
 
-    public void Init(GameManager gameManager)
+    public void Init(GameManager gameManager, LevelManager levelManager)
     {
         _gameManager = gameManager;
+        _levelManager = levelManager;
 
-
-        ToggleUI(true, false, false);
+        ToggleUI(true, false);
 
         // Base Interface Initialization / Инициализация базового интерфейса
         _respawnButton?.onClick.RemoveAllListeners();
-        _respawnButton?.onClick.AddListener(_gameManager.RestartLevel);
+        _respawnButton?.onClick.AddListener(_levelManager.RestartLevel);
         _progressTracker = _progressBar.GetComponent<ProgressTracker>();
-        _progressTracker.Init(_gameManager);
+        _progressTracker.Init(_gameManager, _levelManager);
 
         _blackoutCanvasGroup = _blackout.GetComponent<CanvasGroup>();
         if (_blackoutCanvasGroup == null)
@@ -52,20 +49,9 @@ public class UIManager : MonoBehaviour
             _blackoutCanvasGroup = _blackout.gameObject.AddComponent<CanvasGroup>();
         }
 
-        // Start UI Initialization / Инциализация стартового интерфейса
-
-        foreach (var b in _selectCarButtons)
-        {
-            var btn = b;
-            btn.onClick.RemoveAllListeners();
-            btn.onClick.AddListener(() =>
-                _gameManager.CarInitialization(btn.GetComponent<SelectCarButton>().GetCarPrefab));
-            btn.onClick.AddListener(() => ToggleUI(false, true, false));
-        }
-
         // Finish UI Initialization / Инциализация финишного интерфейса
         _restartButton?.onClick.RemoveAllListeners();
-        _restartButton?.onClick.AddListener(_gameManager.RestartLevel);
+        _restartButton?.onClick.AddListener(_levelManager.RestartLevel);
         _restartButtonTransform = _restartButton?.transform;
     }
 
@@ -92,15 +78,14 @@ public class UIManager : MonoBehaviour
         _gameManager.OnProgressChanged -= UpdateProgressBarUI;
     }
 
-    private void ToggleUI(bool startInterface, bool baseInterface, bool finishInterface)
+    private void ToggleUI(bool baseInterface, bool finishInterface)
     {
-        _startInterface?.gameObject.SetActive(startInterface);
         _baseInterface?.gameObject.SetActive(baseInterface);
         _finishInterface?.gameObject.SetActive(finishInterface);
     }
     private void UpdateProgressBarUI(float progress)
     {
-        if (_gameManager != null && _carScript != null)
+        if (_levelManager != null && _carScript != null)
         {
             _progressBar.size = progress;
         }
@@ -123,7 +108,7 @@ public class UIManager : MonoBehaviour
 
         if (toggle)
         {
-            ToggleUI(false, false, true);
+            ToggleUI(false, true);
 
             _blackoutCanvasGroup?.gameObject.SetActive(true);
             _restartButton?.gameObject.SetActive(true);
@@ -162,7 +147,7 @@ public class UIManager : MonoBehaviour
                     .SetEase(Ease.InBack)
                     .OnComplete(() => _restartButton.gameObject.SetActive(false));
 
-                ToggleUI(false, true, false);
+                ToggleUI(true, false);
             }
         }
     }

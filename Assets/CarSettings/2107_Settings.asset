@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d88d3602da3ade45b5a0330788d5a3e, type: 3}
   m_Name: 2107_Settings
   m_EditorClassIdentifier: 
+  Name: 2107
   Smooth: 6
   Offset: {x: 4, y: 1, z: -20}
   Mass: 10

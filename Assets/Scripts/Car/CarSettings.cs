@@ -3,6 +3,11 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Car Settings", menuName = "Car/Settings", order = 1)]
 public class CarSettings : ScriptableObject
 {
+    [Header("Main Settings / Основные настройки")]
+
+    [Tooltip("Car Name / Название машины")]
+    public string Name = "None";
+
     [Header("Camera Settings / Настройки камеры")]
 
     [Range(0.1f, 10f),Tooltip("Camera follow smoothness (lower value = smoother movement) / Плавность следования камеры за машиной (меньше значение = более плавное движение)")]

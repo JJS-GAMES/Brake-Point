@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d88d3602da3ade45b5a0330788d5a3e, type: 3}
   m_Name: Buhanka_Tuning_Settings
   m_EditorClassIdentifier: 
+  Name: Buhanka Tuning
   Smooth: 5
   Offset: {x: 5, y: 1, z: -20}
   Mass: 10
@@ -30,7 +31,7 @@ MonoBehaviour:
   RestoreSpeed: 10
   MinSpeedToEmit: 5
   EngineSoundClip: {fileID: 8300000, guid: c51eb7b42bb0da8458ec10d632933cd0, type: 3}
-  MinPitch: 0.5
+  MinPitch: 1
   GroundMaxPitch: 2
   AirMaxPitch: 2.5
   GroundPitchSmooth: 5
