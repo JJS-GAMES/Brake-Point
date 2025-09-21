@@ -63,7 +63,17 @@ public class UIManager : MonoBehaviour
         _restartButtonTransform = _restartButton?.transform;
     }
 
-
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            _levelManager.RestartLevel();
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            _levelManager.Load(0);
+        }
+    }
     public void CarUIInitialization(Car carScript)
     {
         _carScript = carScript;

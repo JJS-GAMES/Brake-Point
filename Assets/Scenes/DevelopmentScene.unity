@@ -171,6 +171,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spawn
       objectReference: {fileID: 0}
+    - target: {fileID: 6134099940954847323, guid: 5412663c2892cc044ad150497db85fb9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7819187408861726483, guid: 5412663c2892cc044ad150497db85fb9, type: 3}
     m_RemovedGameObjects:
@@ -8776,6 +8780,10 @@ PrefabInstance:
     - target: {fileID: 587117139990764388, guid: de9fdce99bbf2c14c963359734c6acfe, type: 3}
       propertyPath: m_Name
       value: FinishZone
+      objectReference: {fileID: 0}
+    - target: {fileID: 587117139990764388, guid: de9fdce99bbf2c14c963359734c6acfe, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5544870848922832999, guid: de9fdce99bbf2c14c963359734c6acfe, type: 3}
       propertyPath: m_LocalPosition.x

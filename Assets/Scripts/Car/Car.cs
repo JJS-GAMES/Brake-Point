@@ -21,7 +21,7 @@ public class Car : MonoBehaviour
     public GroundCheck GetGroundCheck => _groundCheck;
     public CarController GetCarController => _carController;
     public CarSettings GetCarSettings => _carSettings;
-    private void Awake() // Временно в Update для эскперементов, в будущем ОБЯЗАТЕЛЬНО вернуть в Awake!
+    public void Init()
     {
         // Physics Settings Initialization
         // Инициализация настроек физики

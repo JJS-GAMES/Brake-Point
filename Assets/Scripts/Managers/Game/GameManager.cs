@@ -1,10 +1,9 @@
 using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private UIManager _uiManager; // Temporary initialization in the inspector / Временно инициализация в инспекторе
+    [SerializeField] private UIManager _uiManager;
     [SerializeField] private LevelManager _levelManager;
     [SerializeField] private GameData _gameData;
     private Car _carScript;
@@ -34,7 +33,6 @@ public class GameManager : MonoBehaviour
         _finishZoneTransform = _finishZone.transform;
 
         _totalDistance = Vector2.Distance(_spawnPosition.position, _finishZoneTransform.position);
-
 
         CarInitialization();
     }
@@ -66,6 +64,7 @@ public class GameManager : MonoBehaviour
         }
 
         _devCamera?.gameObject.SetActive(false);
+        _carScript.Init();
         _uiManager.CarUIInitialization(_carScript);
         _finishZone.Init(_carScript, _uiManager);
     }
