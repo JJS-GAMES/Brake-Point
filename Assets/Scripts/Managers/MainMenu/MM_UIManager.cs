@@ -65,7 +65,7 @@ public class MM_UIManager : MonoBehaviour
             btn.onClick.AddListener(() => _levelManager?.Load(btn.GetComponent<SelectLevelButton>().GetLevelIndex));
         }
 
-        _exitButton?.onClick.RemoveAllListeners();
+        _exitSettignsButton?.onClick.RemoveAllListeners();
         _exitSettignsButton?.onClick.AddListener(() => ToggleInterface(true, false, false, false));
     }
 
