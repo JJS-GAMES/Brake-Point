@@ -12,11 +12,11 @@ public class BrakePedal : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        _carController?.ToggleBraking(true);
+        _carController?.SetBrakeFromUI(true);
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        _carController?.ToggleBraking(false);
+        _carController?.SetBrakeFromUI(false);
     }
 }

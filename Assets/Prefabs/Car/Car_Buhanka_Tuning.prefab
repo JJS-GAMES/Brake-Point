@@ -9896,6 +9896,8 @@ MonoBehaviour:
   _carSettings: {fileID: 11400000, guid: 109268deb4107004bafd89638331686d, type: 2}
   _cameraChase2D: {fileID: 7123191998851299519}
   _target: {fileID: 3965676750135846235}
+  _frontWheel: {fileID: 0}
+  _backWheel: {fileID: 0}
   _groundCheck: {fileID: 4231170653712127927}
 --- !u!1 &5014448030701484860
 GameObject:

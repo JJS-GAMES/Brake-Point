@@ -12,11 +12,11 @@ public class AccelerationPedal : MonoBehaviour, IPointerDownHandler, IPointerUpH
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        _carController?.ToggleWorkingEngine(true);
+        _carController?.SetEngineFromUI(true);
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        _carController?.ToggleWorkingEngine(false);
+        _carController?.SetEngineFromUI(false);
     }
 }

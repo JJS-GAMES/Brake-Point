@@ -10,7 +10,7 @@ public class CarController : MonoBehaviour
     [Space, SerializeField, Tooltip("Front suspension component / Компонент передней подвески")] private WheelJoint2D _frontSuspensionWheelJoint;
     [SerializeField, Tooltip("Back suspension component / Компонент задней подвески")] private WheelJoint2D _backSuspensionWheelJoint;
 
-    private float _mass = 10;
+    private float _mass = 10f;
 
     private float _engineMaxSpeed = 10f;
     private float _coastMaxSpeed = 10f;
@@ -24,8 +24,16 @@ public class CarController : MonoBehaviour
 
     private bool _isWorkingEngine;
     private bool _isBraking;
+
+    private bool _engineFromKeyboard;
+    private bool _engineFromUI;
+
+    private bool _brakeFromKeyboard;
+    private bool _brakeFromUI;
+
     private GroundCheck _groundCheck;
     private Rigidbody2D _rb;
+
     public Rigidbody2D GetRb => _rb;
     public bool GetIsWorkingEngine => _isWorkingEngine;
     public bool GetIsBraking => _isBraking;
@@ -69,7 +77,14 @@ public class CarController : MonoBehaviour
         _backSuspensionWheelJoint.suspension = backSuspensionSettings;
         _backSuspensionWheelJoint.anchor = _backSuspensionWheelJoint.connectedBody.transform.parent.localPosition;
     }
+    private void Update()
+    {
+        SetEngineFromKeyboard(Input.GetKey(KeyCode.RightArrow));
+        SetBrakeFromKeyboard(Input.GetKey(KeyCode.LeftArrow));
 
+        _isWorkingEngine = _engineFromKeyboard || _engineFromUI;
+        _isBraking = _brakeFromKeyboard || _brakeFromUI;
+    }
     private void FixedUpdate()
     {
         if(_groundCheck.IsGround )
@@ -132,7 +147,7 @@ public class CarController : MonoBehaviour
 
             velocity.x = Mathf.Clamp(velocity.x, -_engineMaxSpeed, _engineMaxSpeed);
         }
-        else if (_isBraking) // If we press the brake, we smoothly stop the car.. / Если мы жмем тормоз, плавно останавливаем машинку.
+        else if (_isBraking) // If we press the brake, we smoothly stop the car. / Если мы жмем тормоз, плавно останавливаем машинку.
         {
             velocity.x = Mathf.MoveTowards(velocity.x, 0f, _acceleration * _brakeForce * Time.fixedDeltaTime);
 
@@ -148,12 +163,10 @@ public class CarController : MonoBehaviour
         _rb.linearVelocity = velocity;
     }
 
-    public void ToggleWorkingEngine(bool toggle)
-    {
-        _isWorkingEngine = toggle;
-    }
-    public void ToggleBraking(bool toggle)
-    {
-        _isBraking = toggle;
-    }
+    public void ToggleWorkingEngine(bool toggle) => _isWorkingEngine = toggle;
+    public void ToggleBraking(bool toggle) => _isBraking = toggle;
+    public void SetEngineFromKeyboard(bool state) => _engineFromKeyboard = state;
+    public void SetEngineFromUI(bool state) => _engineFromUI = state;
+    public void SetBrakeFromKeyboard(bool state) => _brakeFromKeyboard = state;
+    public void SetBrakeFromUI(bool state) => _brakeFromUI = state;
 }

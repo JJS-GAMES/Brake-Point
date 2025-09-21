@@ -73,6 +73,4 @@ public class CarEngineSoundController : MonoBehaviour
         _audioSource.pitch = Mathf.Lerp(_audioSource.pitch, targetPitch, Time.deltaTime * smooth);
     }
 
-
-
 }
