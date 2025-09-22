@@ -7,6 +7,7 @@ public class UIManager : MonoBehaviour
 {
     [Header("UI Elements / UI Элементы")]
     [SerializeField] private Canvas _baseInterface;
+    [SerializeField] private Canvas _defeatInterface;
     [SerializeField] private Canvas _finishInterface;
 
     [Header("Base Interface")]
@@ -19,11 +20,16 @@ public class UIManager : MonoBehaviour
     [Space, SerializeField] private AccelerationPedal _accelerationPedal;
     [SerializeField] private BrakePedal _brakePedal;
 
-    [Header("Finish UI")]
-    [Space, SerializeField] private Image _blackout;
-    [SerializeField] private Button _restartButton;
+    [Header("Defeat UI")]
+    [Space, SerializeField] private Image _defeatBlackout;
+    [SerializeField] private Button _restartDefeatButton;
 
-    private Transform _restartButtonTransform;
+    [Header("Finish UI")]
+    [Space, SerializeField] private Image _finishBlackout;
+    [SerializeField] private Button _restartFinishButton;
+
+    private Transform _restartDefeatButtonTransform;
+    private Transform _restartFinishButtonTransform;
 
     private ProgressTracker _progressTracker;
 
@@ -31,16 +37,18 @@ public class UIManager : MonoBehaviour
     private GameManager _gameManager;
 
     private Car _carScript;
-    private CanvasGroup _blackoutCanvasGroup;
+
+    private CanvasGroup _blackoutDefeatCanvasGroup;
+    private CanvasGroup _blackoutFinishCanvasGroup;
 
     private bool _isFinishUIActive = false;
-
+    private bool _isDefeatUIActive = false;
     public void Init(GameManager gameManager, LevelManager levelManager)
     {
         _gameManager = gameManager;
         _levelManager = levelManager;
 
-        ToggleUI(true, false);
+        ToggleUI(true, false, false);
 
         // Base Interface Initialization / Инициализация базового интерфейса
         _respawnButton?.onClick.RemoveAllListeners();
@@ -48,21 +56,31 @@ public class UIManager : MonoBehaviour
         _progressTracker = _progressBar.GetComponent<ProgressTracker>();
         _progressTracker.Init(_gameManager, _levelManager);
 
-        _blackoutCanvasGroup = _blackout.GetComponent<CanvasGroup>();
-        if (_blackoutCanvasGroup == null)
+        _blackoutFinishCanvasGroup = _finishBlackout.GetComponent<CanvasGroup>();
+        if (_blackoutFinishCanvasGroup == null)
         {
-            _blackoutCanvasGroup = _blackout.gameObject.AddComponent<CanvasGroup>();
+            _blackoutFinishCanvasGroup = _finishBlackout.gameObject.AddComponent<CanvasGroup>();
+        }
+
+        _blackoutDefeatCanvasGroup = _defeatBlackout.GetComponent<CanvasGroup>();
+        if (_blackoutDefeatCanvasGroup == null)
+        {
+            _blackoutDefeatCanvasGroup = _defeatBlackout.gameObject.AddComponent<CanvasGroup>();
         }
 
         _returnMainMenuButton?.onClick.RemoveAllListeners();
         _returnMainMenuButton?.onClick.AddListener(() => _levelManager.Load(0));
 
-        // Finish UI Initialization / Инциализация финишного интерфейса
-        _restartButton?.onClick.RemoveAllListeners();
-        _restartButton?.onClick.AddListener(_levelManager.RestartLevel);
-        _restartButtonTransform = _restartButton?.transform;
-    }
+        // Defeat UI Initialization / Инциализация проигрышного интерфейса
+        _restartDefeatButton?.onClick.RemoveAllListeners();
+        _restartDefeatButton?.onClick.AddListener(_levelManager.RestartLevel);
+        _restartDefeatButtonTransform = _restartDefeatButton?.transform;
 
+        // Finish UI Initialization / Инциализация финишного интерфейса
+        _restartFinishButton?.onClick.RemoveAllListeners();
+        _restartFinishButton?.onClick.AddListener(_levelManager.RestartLevel);
+        _restartFinishButtonTransform = _restartFinishButton?.transform;
+    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.R))
@@ -96,9 +114,10 @@ public class UIManager : MonoBehaviour
         _gameManager.OnProgressChanged -= UpdateProgressBarUI;
     }
 
-    private void ToggleUI(bool baseInterface, bool finishInterface)
+    private void ToggleUI(bool baseInterface, bool defeatInterface, bool finishInterface)
     {
         _baseInterface?.gameObject.SetActive(baseInterface);
+        _defeatInterface?.gameObject.SetActive(defeatInterface);
         _finishInterface?.gameObject.SetActive(finishInterface);
     }
     private void UpdateProgressBarUI(float progress)
@@ -116,57 +135,60 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void ToggleFinishUI(bool toggle, bool instant = false)
+    private void TogglePanel(bool toggle,bool instant, ref bool isActiveFlag, CanvasGroup blackout, Transform restartButtonTransform, Button restartButton, bool showAsFinish)
     {
-        if (_isFinishUIActive == toggle) return;
-        _isFinishUIActive = toggle;
+        if (isActiveFlag == toggle) return;
+        isActiveFlag = toggle;
 
-        _blackoutCanvasGroup.DOKill();
-        _restartButtonTransform.DOKill();
+        blackout.DOKill();
+        restartButtonTransform.DOKill();
 
         if (toggle)
         {
-            ToggleUI(false, true);
+            ToggleUI(false, !showAsFinish, showAsFinish);
 
-            _blackoutCanvasGroup?.gameObject.SetActive(true);
-            _restartButton?.gameObject.SetActive(true);
+            blackout.gameObject.SetActive(true);
+            restartButton.gameObject.SetActive(true);
 
             if (instant)
             {
-                _blackoutCanvasGroup.alpha = 1f;
-                _restartButtonTransform.localScale = Vector3.one;
+                blackout.alpha = 1f;
+                restartButtonTransform.localScale = Vector3.one;
             }
             else
             {
-                _blackoutCanvasGroup.alpha = 0f;
-                _restartButtonTransform.localScale = Vector3.zero;
+                blackout.alpha = 0f;
+                restartButtonTransform.localScale = Vector3.zero;
 
-                _blackoutCanvasGroup?.DOFade(1f, 0.1f).SetEase(Ease.InOutQuad);
-                _restartButtonTransform.DOScale(1f, 0.6f).SetEase(Ease.OutBack);
+                blackout.DOFade(1f, 0.1f).SetEase(Ease.InOutQuad);
+                restartButtonTransform.DOScale(1f, 0.6f).SetEase(Ease.OutBack);
             }
         }
         else
         {
             if (instant)
             {
-                _blackoutCanvasGroup.alpha = 0f;
-                _blackoutCanvasGroup?.gameObject.SetActive(false);
+                blackout.alpha = 0f;
+                blackout.gameObject.SetActive(false);
 
-                _restartButtonTransform.localScale = Vector3.zero;
-                _restartButton?.gameObject.SetActive(false);
+                restartButtonTransform.localScale = Vector3.zero;
+                restartButton.gameObject.SetActive(false);
             }
             else
             {
-                _blackoutCanvasGroup?.DOFade(0f, 0.5f)
-                    .SetEase(Ease.InOutQuad)
-                    .OnComplete(() => _blackoutCanvasGroup.gameObject.SetActive(false));
+                blackout.DOFade(0f, 0.5f)
+                       .SetEase(Ease.InOutQuad)
+                       .OnComplete(() => blackout.gameObject.SetActive(false));
 
-                _restartButtonTransform.DOScale(0f, 0.4f)
-                    .SetEase(Ease.InBack)
-                    .OnComplete(() => _restartButton.gameObject.SetActive(false));
+                restartButtonTransform.DOScale(0f, 0.4f)
+                                      .SetEase(Ease.InBack)
+                                      .OnComplete(() => restartButton.gameObject.SetActive(false));
 
-                ToggleUI(true, false);
+                ToggleUI(true, false, false);
             }
         }
     }
+    public void ToggleDefeatUI(bool toggle, bool instant = false) => TogglePanel(toggle, instant, ref _isDefeatUIActive,_blackoutDefeatCanvasGroup, _restartDefeatButtonTransform, _restartDefeatButton, showAsFinish: false);
+    public void ToggleFinishUI(bool toggle, bool instant = false) => TogglePanel(toggle, instant, ref _isFinishUIActive, _blackoutFinishCanvasGroup, _restartFinishButtonTransform, _restartFinishButton, showAsFinish: true);
+
 }
