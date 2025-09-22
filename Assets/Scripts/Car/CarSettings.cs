@@ -3,11 +3,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Car Settings", menuName = "Car/Settings", order = 1)]
 public class CarSettings : ScriptableObject
 {
-    [Header("Main Settings / Основные настройки")]
-
-    [Tooltip("Car Name / Название машины")]
-    public string Name = "None";
-
     [Header("Camera Settings / Настройки камеры")]
 
     [Range(0.1f, 10f),Tooltip("Camera follow smoothness (lower value = smoother movement) / Плавность следования камеры за машиной (меньше значение = более плавное движение)")]
@@ -30,7 +25,16 @@ public class CarSettings : ScriptableObject
     [Space, Range(0.1f, 10f), Tooltip("Brake force applied when braking (higher = stops faster) / Сила торможения при нажатии на тормоз (чем выше, тем быстрее останавливается машина)")]
     public float BrakeForce = 2f;
 
-    [Space]
+    [Space, Header("----------------------------"), Space]
+
+    [Header("Flip Settings / Настройки переворота")]
+
+    [Range(0.1f, 1f), Tooltip("How often to check the flip condition (seconds). / Как часто проверять условие переворота (секунды).")]
+    public float FlipCheckInterval = 0.2f;
+    [Range(-0.1f, 5f), Tooltip("The maximum speed below which we consider the car to have stopped. / Максимальная скорость, ниже которой считаем машину остановившейся.")]
+    public float SpeedThreshold = 0.1f;
+    [Range(-1f, 1f), Tooltip("Threshold for determining that the car is upside down: -1 = completely upside down, 0 = on its side, 1 = on wheels. / Порог для определения, что машина перевернута: -1 = полностью вверх ногами, 0 = на боку, 1 = на колёсах.")]
+    public float UpDotThreshold = -0.8f;
 
     [Space, Header("----------------------------"), Space]
 

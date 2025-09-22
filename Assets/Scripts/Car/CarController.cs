@@ -16,6 +16,11 @@ public class CarController : MonoBehaviour
     private float _coastMaxSpeed = 10f;
     private float _acceleration = 10f;
 
+    private float _flipCheckInterval = 0.2f;
+    private float _speedThreshold = 0.1f;
+    private float _upDotThreshold = -0.8f;
+    private float _flipTimer;
+
     private float _brakeForce = 2f;
 
     private float _airTorque = 20f;
@@ -39,8 +44,9 @@ public class CarController : MonoBehaviour
     public bool GetIsBraking => _isBraking;
 
     public event Action<float> OnSpeedChanged;
+    public event Action OnCarDefeated;
 
-    public void Init(GroundCheck groundCheck, float mass, float engineMaxSpeed, float coastMaxSpeed, float acceleration, float brakeForce, float airTorque, float airSlowEffect, float airBoostEffect, float frontSuspensionStiffness, float backSuspensionStiffness)
+    public void Init(GroundCheck groundCheck, float mass, float engineMaxSpeed, float coastMaxSpeed, float acceleration, float flipCheckInterval, float speedThreshold, float upDotThreshold, float brakeForce, float airTorque, float airSlowEffect, float airBoostEffect, float frontSuspensionStiffness, float backSuspensionStiffness)
     {
         _rb = GetComponent<Rigidbody2D>();
 
@@ -54,6 +60,10 @@ public class CarController : MonoBehaviour
         _coastMaxSpeed = coastMaxSpeed;
         _acceleration = acceleration;
         _groundCheck = groundCheck;
+
+        _flipCheckInterval = flipCheckInterval;
+        _speedThreshold = speedThreshold;
+        _upDotThreshold = upDotThreshold;
 
         _brakeForce = brakeForce;
 
@@ -84,6 +94,8 @@ public class CarController : MonoBehaviour
 
         _isWorkingEngine = _engineFromKeyboard || _engineFromUI;
         _isBraking = _brakeFromKeyboard || _brakeFromUI;
+
+        CheckForFlipAndStop();
     }
     private void FixedUpdate()
     {
@@ -125,7 +137,21 @@ public class CarController : MonoBehaviour
         _rb.linearVelocity = newVelocity;
     }
 
+    private void CheckForFlipAndStop()
+    {
+        _flipTimer += Time.deltaTime;
+        if (_flipTimer < _flipCheckInterval) return;
+        _flipTimer = 0f;
 
+        bool isStopped = _rb.linearVelocity.magnitude < _speedThreshold;
+
+        bool isUpsideDown = Vector2.Dot(transform.up, Vector2.up) < _upDotThreshold;
+
+        if (isStopped && isUpsideDown)
+        {
+            OnCarDefeated?.Invoke();
+        }
+    }
 
     private void Move()
     {

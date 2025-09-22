@@ -18,7 +18,7 @@ MonoBehaviour:
   Mass: 10
   EngineMaxSpeed: 20
   CoastMaxSpeed: 10
-  Acceleration: 8
+  Acceleration: 10
   BrakeForce: 2
   CarPhysicsMaterial: {fileID: 6200000, guid: d0e6e03167fe7984cafc62378b1042e2, type: 2}
   Friction: 0.6

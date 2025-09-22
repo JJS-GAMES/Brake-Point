@@ -1,11 +1,11 @@
-using DG.Tweening;
+п»їusing DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    [Header("UI Elements / UI Элементы")]
+    [Header("UI Elements / UI Р­Р»РµРјРµРЅС‚С‹")]
     [SerializeField] private Canvas _baseInterface;
     [SerializeField] private Canvas _defeatInterface;
     [SerializeField] private Canvas _finishInterface;
@@ -50,7 +50,7 @@ public class UIManager : MonoBehaviour
 
         ToggleUI(true, false, false);
 
-        // Base Interface Initialization / Инициализация базового интерфейса
+        // Base Interface Initialization / РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ Р±Р°Р·РѕРІРѕРіРѕ РёРЅС‚РµСЂС„РµР№СЃР°
         _respawnButton?.onClick.RemoveAllListeners();
         _respawnButton?.onClick.AddListener(_levelManager.RestartLevel);
         _progressTracker = _progressBar.GetComponent<ProgressTracker>();
@@ -71,12 +71,12 @@ public class UIManager : MonoBehaviour
         _returnMainMenuButton?.onClick.RemoveAllListeners();
         _returnMainMenuButton?.onClick.AddListener(() => _levelManager.Load(0));
 
-        // Defeat UI Initialization / Инциализация проигрышного интерфейса
+        // Defeat UI Initialization / РРЅС†РёР°Р»РёР·Р°С†РёСЏ РїСЂРѕРёРіСЂС‹С€РЅРѕРіРѕ РёРЅС‚РµСЂС„РµР№СЃР°
         _restartDefeatButton?.onClick.RemoveAllListeners();
         _restartDefeatButton?.onClick.AddListener(_levelManager.RestartLevel);
         _restartDefeatButtonTransform = _restartDefeatButton?.transform;
 
-        // Finish UI Initialization / Инциализация финишного интерфейса
+        // Finish UI Initialization / РРЅС†РёР°Р»РёР·Р°С†РёСЏ С„РёРЅРёС€РЅРѕРіРѕ РёРЅС‚РµСЂС„РµР№СЃР°
         _restartFinishButton?.onClick.RemoveAllListeners();
         _restartFinishButton?.onClick.AddListener(_levelManager.RestartLevel);
         _restartFinishButtonTransform = _restartFinishButton?.transform;
@@ -98,6 +98,7 @@ public class UIManager : MonoBehaviour
         var controller = _carScript.GetCarController;
 
         controller.OnSpeedChanged += UpdateSpeedText;
+        controller.OnCarDefeated += ShowDefeatUI;
         _gameManager.OnProgressChanged += UpdateProgressBarUI;
 
         _accelerationPedal?.Init(controller);
@@ -111,6 +112,7 @@ public class UIManager : MonoBehaviour
         if (controller == null) return;
 
         controller.OnSpeedChanged -= UpdateSpeedText;
+        controller.OnCarDefeated -= ShowDefeatUI;
         _gameManager.OnProgressChanged -= UpdateProgressBarUI;
     }
 
@@ -133,6 +135,11 @@ public class UIManager : MonoBehaviour
         {
             _carSpeed.text = $"Speed: {Mathf.RoundToInt(speed)} km/h";
         }
+    }
+
+    private void ShowDefeatUI()
+    {
+        ToggleDefeatUI(true);
     }
 
     private void TogglePanel(bool toggle,bool instant, ref bool isActiveFlag, CanvasGroup blackout, Transform restartButtonTransform, Button restartButton, bool showAsFinish)

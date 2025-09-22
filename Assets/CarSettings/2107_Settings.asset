@@ -16,7 +16,7 @@ MonoBehaviour:
   Smooth: 6
   Offset: {x: 4, y: 1, z: -20}
   Mass: 10
-  EngineMaxSpeed: 20
+  EngineMaxSpeed: 30
   CoastMaxSpeed: 10
   Acceleration: 10
   BrakeForce: 2

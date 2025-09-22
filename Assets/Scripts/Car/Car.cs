@@ -32,7 +32,7 @@ public class Car : MonoBehaviour
         // Инициализация контроллера машинки
 
         _carController = GetComponentInChildren<CarController>();
-        _carController?.Init(_groundCheck, _carSettings.Mass, _carSettings.EngineMaxSpeed, _carSettings.CoastMaxSpeed, _carSettings.Acceleration, _carSettings.BrakeForce, _carSettings.AirTorque, _carSettings.AirSlowEffect, _carSettings.AirBoostEffect, _carSettings.FrontSuspensionStiffness, _carSettings.BackSuspensionStiffness);
+        _carController?.Init(_groundCheck, _carSettings.Mass, _carSettings.EngineMaxSpeed, _carSettings.CoastMaxSpeed, _carSettings.Acceleration, _carSettings.FlipCheckInterval, _carSettings.SpeedThreshold, _carSettings.UpDotThreshold, _carSettings.BrakeForce, _carSettings.AirTorque, _carSettings.AirSlowEffect, _carSettings.AirBoostEffect, _carSettings.FrontSuspensionStiffness, _carSettings.BackSuspensionStiffness);
 
         // Engine Sound Controller Initialization
         // Инициализация контроллера звука двигателя
