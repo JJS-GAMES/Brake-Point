@@ -10264,6 +10264,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _frontSuspensionWheelJoint: {fileID: 4217650077420380116}
   _backSuspensionWheelJoint: {fileID: 1549760328077751342}
+  _mass: 10
+  _engineMaxSpeed: 10
+  _coastMaxSpeed: 10
+  _motorMaxTorque: 1500
+  _motorBrakeTorque: 3000
+  _motorSpeedFactor: 360
+  _brakeForce: 2
+  _airTorque: 20
+  _airSlowEffect: 5
+  _airBoostEffect: 12
 --- !u!114 &3792070507787781717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10290,6 +10300,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _frontWheelParticleSystem: {fileID: 5727244215747483121}
   _backWheelParticleSystem: {fileID: 8683372407291640505}
+  _updateInterval: 0.05
 --- !u!212 &1911539042348058917
 SpriteRenderer:
   m_ObjectHideFlags: 0

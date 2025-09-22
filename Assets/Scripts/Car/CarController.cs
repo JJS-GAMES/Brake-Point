@@ -101,7 +101,6 @@ public class CarController : MonoBehaviour
     {
         _rb.angularVelocity = Mathf.MoveTowards(_rb.angularVelocity, 0f, _rb.angularDamping * Time.fixedDeltaTime);
 
-
         if (_isWorkingEngine && !_isBraking) // If the engine is running, gently turn the machine forward. / Если двигатель работает, плавно поворачиваем машинку вперед.
         {
             _rb.AddTorque(-_airTorque * Time.fixedDeltaTime, ForceMode2D.Impulse);
