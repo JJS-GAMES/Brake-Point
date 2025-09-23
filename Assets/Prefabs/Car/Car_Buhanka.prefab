@@ -10219,10 +10219,10 @@ GameObject:
   - component: {fileID: 3792070507787781717}
   - component: {fileID: 709271521883613517}
   - component: {fileID: 1911539042348058917}
+  - component: {fileID: 1760475777333396531}
   - component: {fileID: 7621503359602278706}
   - component: {fileID: 4217650077420380116}
   - component: {fileID: 1549760328077751342}
-  - component: {fileID: 8128412406883587121}
   - component: {fileID: 7027925840479647843}
   m_Layer: 6
   m_Name: Body
@@ -10264,16 +10264,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _frontSuspensionWheelJoint: {fileID: 4217650077420380116}
   _backSuspensionWheelJoint: {fileID: 1549760328077751342}
-  _mass: 10
-  _engineMaxSpeed: 10
-  _coastMaxSpeed: 10
-  _motorMaxTorque: 1500
-  _motorBrakeTorque: 3000
-  _motorSpeedFactor: 360
-  _brakeForce: 2
-  _airTorque: 20
-  _airSlowEffect: 5
-  _airBoostEffect: 12
 --- !u!114 &3792070507787781717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10356,6 +10346,65 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!60 &1760475777333396531
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7135672725151967950}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: d0e6e03167fe7984cafc62378b1042e2, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 6.8125, y: 3.1875}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 1.78125, y: -0.59375}
+      - {x: 2.40625, y: -0.96875}
+      - {x: 3.40625, y: -0.90625}
+      - {x: 3.34375, y: 0.15625}
+      - {x: 2.34375, y: 1.53125}
+      - {x: -2.84375, y: 1.53125}
+      - {x: -3.34375, y: 0.65625}
+      - {x: -3.40625, y: -0.84375}
+      - {x: -2.46875, y: -0.96875}
+      - {x: -1.84375, y: -0.59375}
+      - {x: -1.21875, y: -1.09375}
+      - {x: 1.28125, y: -1.21875}
+  m_UseDelaunayMesh: 0
 --- !u!50 &7621503359602278706
 Rigidbody2D:
   serializedVersion: 5
@@ -10433,68 +10482,6 @@ WheelJoint2D:
   m_Motor:
     m_MotorSpeed: 0
     m_MaximumMotorForce: 10000
---- !u!60 &8128412406883587121
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7135672725151967950}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 6.8125, y: 3.1875}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 3.337492, y: 0.14840579}
-      - {x: 2.7429485, y: 1.1609225}
-      - {x: 2.3335686, y: 1.542181}
-      - {x: -2.818718, y: 1.5593708}
-      - {x: -3.1569996, y: 1.2898448}
-      - {x: -3.3231316, y: 0.6608482}
-      - {x: -3.423441, y: -0.8858889}
-      - {x: -3.1351376, y: -0.9725875}
-      - {x: -2.4884682, y: -0.9723363}
-      - {x: -1.1960526, y: -1.1186993}
-      - {x: -0.55069166, y: -1.1077682}
-      - {x: 1.2492065, y: -1.2171643}
-      - {x: 2.4852407, y: -0.98090756}
-      - {x: 3.11094, y: -0.98201764}
-      - {x: 3.40625, y: -0.95389676}
-  m_UseDelaunayMesh: 0
 --- !u!82 &7027925840479647843
 AudioSource:
   m_ObjectHideFlags: 0

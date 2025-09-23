@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 36b6de6dea9298a49967b4b1d1d1b1e7
+guid: e0ce6cf2a1386664f9c192dfcfb23af7
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5608174607081046103
-    second: "\u041A\u0443\u0437\u043E\u0432_0"
+      213: -6387977727153438705
+    second: Wheel_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -98,7 +98,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
     buildTarget: Android
-    maxTextureSize: 128
+    maxTextureSize: 1024
     resizeAlgorithm: 0
     textureFormat: 47
     textureCompression: 1
@@ -126,35 +126,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "\u041A\u0443\u0437\u043E\u0432_0"
+      name: Wheel_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 109
-        height: 51
+        width: 15
+        height: 15
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
-      physicsShape:
-      - - {x: 28.5, y: -9.5}
-        - {x: 38.5, y: -15.5}
-        - {x: 54.5, y: -14.5}
-        - {x: 53.5, y: 2.5}
-        - {x: 37.5, y: 24.5}
-        - {x: -45.5, y: 24.5}
-        - {x: -53.5, y: 10.5}
-        - {x: -54.5, y: -13.5}
-        - {x: -39.5, y: -15.5}
-        - {x: -29.5, y: -9.5}
-        - {x: -19.5, y: -17.5}
-        - {x: 20.5, y: -19.5}
-      tessellationDetail: 0
+      physicsShape: []
+      tessellationDetail: -1
       bones: []
-      spriteID: 9af719288e2cb22b0800000000000000
-      internalID: -5608174607081046103
+      spriteID: f0089e32a185957a0800000000000000
+      internalID: -6387977727153438705
       vertices: []
       indices: 
       edges: []
@@ -163,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 79aea042ad5d29245892a54b8f75045a
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -173,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      "\u041A\u0443\u0437\u043E\u0432_0": -5608174607081046103
+      Wheel_0: -6387977727153438705
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
