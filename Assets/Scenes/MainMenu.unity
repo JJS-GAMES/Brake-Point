@@ -7329,6 +7329,7 @@ MonoBehaviour:
   - {fileID: 397246167}
   - {fileID: 1100950937}
   - {fileID: 1567035970}
+  - {fileID: 2141092287}
   _selectLevelButtons:
   - {fileID: 1017911177}
   _exitSettignsButton: {fileID: 596482374}
@@ -7707,7 +7708,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7bc65b2f14c2e74eb81fa5b75607daa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _carPrefab: {fileID: 2043157057007907640, guid: bfe2dc4d0821d484eb736325f3db60e1, type: 3}
+  _carPrefab: {fileID: 2043157057007907640, guid: 33aaf4a8122e48b4a8d7f0d9633a8eab, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
