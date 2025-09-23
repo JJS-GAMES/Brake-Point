@@ -27,8 +27,8 @@ MonoBehaviour:
   AirTorque: 15
   AirSlowEffect: 3
   AirBoostEffect: 7
-  FrontSuspensionStiffness: 9
-  BackSuspensionStiffness: 9
+  FrontSuspensionStiffness: 11
+  BackSuspensionStiffness: 11
   DecaySpeed: 20
   RestoreSpeed: 10
   MinSpeedToEmit: 5

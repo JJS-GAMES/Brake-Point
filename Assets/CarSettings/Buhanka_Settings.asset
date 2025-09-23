@@ -17,7 +17,7 @@ MonoBehaviour:
   Mass: 15
   EngineMaxSpeed: 20
   CoastMaxSpeed: 10
-  Acceleration: 10
+  Acceleration: 8
   BrakeForce: 2
   FlipCheckInterval: 0.2
   SpeedThreshold: 0.1
@@ -27,8 +27,8 @@ MonoBehaviour:
   AirTorque: 20
   AirSlowEffect: 3
   AirBoostEffect: 7
-  FrontSuspensionStiffness: 8
-  BackSuspensionStiffness: 8
+  FrontSuspensionStiffness: 11
+  BackSuspensionStiffness: 11
   DecaySpeed: 20
   RestoreSpeed: 10
   MinSpeedToEmit: 5
