@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     [SerializeField, Tooltip("Prefab of the finish area on the stage / Префаб финишной зоны на сцене")] 
     private FinishZone _finishZone;
     [SerializeField, Tooltip("Prefab of the death area on the stage / Префаб смертельной зоны на сцене")]
-    private DeathZone _deathZone;
+    private DeathZone[] _deathZones;
 
     [Header("Development")]
     [SerializeField] private Camera _devCamera;
@@ -68,7 +68,10 @@ public class GameManager : MonoBehaviour
         _devCamera?.gameObject.SetActive(false);
         _carScript.Init();
         _uiManager.CarUIInitialization(_carScript);
-        _deathZone?.Init(_carScript, _uiManager);
+        foreach (var deathZone in _deathZones)
+        {
+            deathZone?.Init(_carScript, _uiManager);
+        }
         _finishZone.Init(_carScript, _uiManager);
     }
 
