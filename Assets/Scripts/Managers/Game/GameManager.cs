@@ -5,7 +5,9 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private UIManager _uiManager;
     [SerializeField] private LevelManager _levelManager;
+    [SerializeField] private ParallaxManager _parallaxManager;
     [SerializeField] private GameData _gameData;
+
     private Car _carScript;
 
     [Header("Zones / Зоны")]
@@ -16,8 +18,8 @@ public class GameManager : MonoBehaviour
     [SerializeField, Tooltip("Prefab of the death area on the stage / Префаб смертельной зоны на сцене")]
     private DeathZone[] _deathZones;
 
-    [Header("Development")]
-    [SerializeField] private Camera _devCamera;
+    [Header("Game")]
+    [SerializeField] private Camera _mainCamera;
 
     private Transform _finishZoneTransform;
 
@@ -28,6 +30,8 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        if (_mainCamera == null) _mainCamera = Camera.main;
+
         _uiManager.Init(this, _levelManager);
     }
     private void Start()
@@ -37,6 +41,7 @@ public class GameManager : MonoBehaviour
         _totalDistance = Vector2.Distance(_spawnPosition.position, _finishZoneTransform.position);
 
         CarInitialization();
+        _parallaxManager.Init(_mainCamera);
     }
 
     private void FixedUpdate()
@@ -65,8 +70,7 @@ public class GameManager : MonoBehaviour
             car.transform.position = new Vector2(0, 0);
         }
 
-        _devCamera?.gameObject.SetActive(false);
-        _carScript.Init();
+        _carScript.Init(_mainCamera);
         _uiManager.CarUIInitialization(_carScript);
         foreach (var deathZone in _deathZones)
         {

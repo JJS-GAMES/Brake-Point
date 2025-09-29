@@ -21,7 +21,7 @@ public class Car : MonoBehaviour
     public GroundCheck GetGroundCheck => _groundCheck;
     public CarController GetCarController => _carController;
     public CarSettings GetCarSettings => _carSettings;
-    public void Init()
+    public void Init(Camera camera)
     {
         // Physics Settings Initialization
         // Инициализация настроек физики
@@ -33,6 +33,8 @@ public class Car : MonoBehaviour
 
         _carController = GetComponentInChildren<CarController>();
         _carController?.Init(_groundCheck, _carSettings.Mass, _carSettings.EngineMaxSpeed, _carSettings.CoastMaxSpeed, _carSettings.Acceleration, _carSettings.FlipCheckInterval, _carSettings.SpeedThreshold, _carSettings.UpDotThreshold, _carSettings.BrakeForce, _carSettings.AirTorque, _carSettings.AirSlowEffect, _carSettings.AirBoostEffect, _carSettings.FrontSuspensionStiffness, _carSettings.BackSuspensionStiffness);
+
+        _cameraChase2D = camera.GetComponent<CameraChase2D>();  
 
         // Engine Sound Controller Initialization
         // Инициализация контроллера звука двигателя
