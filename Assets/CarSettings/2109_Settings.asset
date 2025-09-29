@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 2109_Settings
   m_EditorClassIdentifier: 
   Smooth: 6
-  Offset: {x: 4, y: 1, z: -30}
+  Offset: {x: 4, y: 1, z: -20}
   Mass: 10
   EngineMaxSpeed: 30
   CoastMaxSpeed: 10

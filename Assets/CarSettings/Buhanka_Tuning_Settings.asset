@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Buhanka_Tuning_Settings
   m_EditorClassIdentifier: 
   Smooth: 5
-  Offset: {x: 5, y: 1, z: -30}
+  Offset: {x: 5, y: 1, z: -20}
   Mass: 20
   EngineMaxSpeed: 20
   CoastMaxSpeed: 10

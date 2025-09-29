@@ -1,12 +1,13 @@
-using System;
 using UnityEngine;
 
-[Serializable]
+[System.Serializable]
 public class ParallaxLayer
 {
-    public GameObject ParallaxPrefab => _parallaxPrefab;
+    public GameObject Prefab => _prefab;
     public float ParallaxFactor => _parallaxFactor;
+    public int Copies => _copies;
 
-    [SerializeField] private GameObject _parallaxPrefab;
-    [Range(0f, 1f), SerializeField] private float _parallaxFactor = 1f;
+    [SerializeField] private GameObject _prefab;
+    [Range(0f, 1f), SerializeField] private float _parallaxFactor = 0.5f;
+    [SerializeField] private int _copies = 2;
 }
