@@ -17,7 +17,8 @@ MonoBehaviour:
   FrontWheel: 1
   BackWheel: 1
   Mass: 10
-  MotorMaxSpeed: 132
+  MotorMaximumSpeed: 120
+  MaximumMotorTorque: 20
   BreakForce: 2
   FlipCheckInterval: 0.2
   SpeedThreshold: 0.1
@@ -25,6 +26,8 @@ MonoBehaviour:
   CarPhysicsMaterial: {fileID: 6200000, guid: d0e6e03167fe7984cafc62378b1042e2, type: 2}
   Friction: 0.6
   AirTorque: 20
+  FrontWheelTraction: 1
+  BackWheelTraction: 1
   FrontSuspensionStiffness: 12
   BackSuspensionStiffness: 10
   DecaySpeed: 20
