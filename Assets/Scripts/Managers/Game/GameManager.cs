@@ -15,8 +15,6 @@ public class GameManager : MonoBehaviour
     private Transform _spawnPosition;
     [SerializeField, Tooltip("Prefab of the finish area on the stage / Префаб финишной зоны на сцене")] 
     private FinishZone _finishZone;
-    [SerializeField, Tooltip("Prefab of the death area on the stage / Префаб смертельной зоны на сцене")]
-    private DeathZone[] _deathZones;
 
     [Header("Game")]
     [SerializeField] private Camera _mainCamera;
@@ -72,11 +70,6 @@ public class GameManager : MonoBehaviour
 
         _carScript.Init(_mainCamera);
         _uiManager.CarUIInitialization(_carScript);
-        foreach (var deathZone in _deathZones)
-        {
-            deathZone?.Init(_carScript, _uiManager);
-        }
-        _finishZone.Init(_carScript, _uiManager);
     }
 
     public float CalculateLevelProgress()

@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    public static UIManager Instance { get; private set; }
+
     [Header("UI Elements / UI Элементы")]
     [SerializeField] private Canvas _baseInterface;
     [SerializeField] private Canvas _defeatInterface;
@@ -80,6 +82,17 @@ public class UIManager : MonoBehaviour
         _restartFinishButton?.onClick.RemoveAllListeners();
         _restartFinishButton?.onClick.AddListener(_levelManager.RestartLevel);
         _restartFinishButtonTransform = _restartFinishButton?.transform;
+    }
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
     }
     private void Update()
     {

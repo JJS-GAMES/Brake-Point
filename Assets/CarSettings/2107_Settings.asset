@@ -24,9 +24,9 @@ MonoBehaviour:
   UpDotThreshold: -0.8
   CarPhysicsMaterial: {fileID: 6200000, guid: d0e6e03167fe7984cafc62378b1042e2, type: 2}
   Friction: 0.6
-  AirTorque: 10
-  FrontSuspensionStiffness: 14
-  BackSuspensionStiffness: 12
+  AirTorque: 20
+  FrontSuspensionStiffness: 10
+  BackSuspensionStiffness: 8
   DecaySpeed: 20
   RestoreSpeed: 10
   MinSpeedToEmit: 5
