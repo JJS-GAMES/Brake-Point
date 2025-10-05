@@ -47,7 +47,7 @@ public class CarEngineSoundController : MonoBehaviour
     private void UpdateEngineSound()
     {
         float speed = _carScript.GetCarController.GetRb.linearVelocity.magnitude;
-        float maxSpeed = _carScript.GetCarSettings.MotorMaxSpeed;
+        float maxSpeed = _carScript.GetCarSettings.MotorMaximumSpeed;
         float t = Mathf.Clamp01(speed / maxSpeed);
 
         float targetPitch;

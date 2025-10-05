@@ -12,7 +12,11 @@ public class CarController : MonoBehaviour
 
     private float _mass = 10f;
 
-    private float _motorMaxSpeed = 10f;
+    private float _frontWheelTraction = 1f;
+    private float _backWheelTraction = 1f;
+
+    private float _motorMaximumSpeed = 10f;
+    private float _maximumMotorTorque = 20f;
 
     private float _flipCheckInterval = 0.2f;
     private float _speedThreshold = 0.1f;
@@ -36,18 +40,18 @@ public class CarController : MonoBehaviour
     private bool _brakeFromUI;
 
     private GroundCheck _groundCheck;
-    private Rigidbody2D _rb;
+    private Rigidbody2D _rigidbody;
 
-    public Rigidbody2D GetRb => _rb;
+    public Rigidbody2D GetRb => _rigidbody;
     public bool IsWorkingEngine => _isWorkingEngine;
     public bool IsBraking => _isBraking;
 
     public event Action<float> OnSpeedChanged;
     public event Action OnCarDefeated;
 
-    public void Init(GroundCheck groundCheck, bool frontWheel, bool backWheel, float mass, float motorMaxSpeed, float flipCheckInterval, float speedThreshold, float upDotThreshold, float brakeForce, float airTorque, float frontSuspensionStiffness, float backSuspensionStiffness)
+    public void Init(GroundCheck groundCheck, bool frontWheel, bool backWheel, float mass, float motorMaximumSpeed, float maximumMotorTorque, float flipCheckInterval, float speedThreshold, float upDotThreshold, float brakeForce, float airTorque, float frontSuspensionStiffness, float backSuspensionStiffness,float frontWheelTraction, float backWheelTraction)
     {
-        _rb = GetComponent<Rigidbody2D>();
+        _rigidbody = GetComponent<Rigidbody2D>();
 
         // Main Settings
         // Основные настройки
@@ -56,9 +60,10 @@ public class CarController : MonoBehaviour
         _backWheel = backWheel;
 
         _mass = mass;
-        _rb.mass = _mass;
+        _rigidbody.mass = _mass;
 
-        _motorMaxSpeed = motorMaxSpeed;
+        _motorMaximumSpeed = motorMaximumSpeed;
+        _maximumMotorTorque = maximumMotorTorque;
         _groundCheck = groundCheck;
 
         _flipCheckInterval = flipCheckInterval;
@@ -75,17 +80,28 @@ public class CarController : MonoBehaviour
         // Suspension Settings
         // Настройки подвески
 
+        _frontWheelTraction = frontWheelTraction;
+        _backWheelTraction = backWheelTraction;
+
         var frontSuspensionSettings = _frontSuspensionWheelJoint.suspension;
         frontSuspensionSettings.frequency = frontSuspensionStiffness;
         _frontSuspensionWheelJoint.suspension = frontSuspensionSettings;
         _frontSuspensionWheelJoint.anchor = _frontSuspensionWheelJoint.connectedBody.transform.parent.localPosition;
+        if (_frontSuspensionWheelJoint.connectedBody.GetComponent<CircleCollider2D>().sharedMaterial != null)
+        {
+            _frontSuspensionWheelJoint.connectedBody.GetComponent<CircleCollider2D>().sharedMaterial.friction = _frontWheelTraction;
+        }
 
         var backSuspensionSettings = _backSuspensionWheelJoint.suspension;
         backSuspensionSettings.frequency = backSuspensionStiffness;
         _backSuspensionWheelJoint.suspension = backSuspensionSettings;
         _backSuspensionWheelJoint.anchor = _backSuspensionWheelJoint.connectedBody.transform.parent.localPosition;
+        if (_backSuspensionWheelJoint.connectedBody.GetComponent<CircleCollider2D>().sharedMaterial != null)
+        {
+            _backSuspensionWheelJoint.connectedBody.GetComponent<CircleCollider2D>().sharedMaterial.friction = _backWheelTraction;
+        }
 
-        _rb.centerOfMass = new Vector2(0, -0.2f);
+        _rigidbody.centerOfMass = new Vector2(0, -0.2f);
     }
     private void Update()
     {
@@ -111,15 +127,15 @@ public class CarController : MonoBehaviour
 
     private void ApplyAirSpeedEffect()
     {
-        _rb.angularVelocity = Mathf.MoveTowards(_rb.angularVelocity, 0f, _rb.angularDamping * Time.fixedDeltaTime);
+        _rigidbody.angularVelocity = Mathf.MoveTowards(_rigidbody.angularVelocity, 0f, _rigidbody.angularDamping * Time.fixedDeltaTime);
 
         if (_isWorkingEngine && !_isBraking) // If the engine is running, gently turn the machine forward. / Если двигатель работает, плавно поворачиваем машинку вперед.
         {
-            _rb.AddTorque(-_airTorque * Time.fixedDeltaTime, ForceMode2D.Impulse);
+            _rigidbody.AddTorque(-_airTorque * Time.fixedDeltaTime, ForceMode2D.Impulse);
         }
         else if (_isBraking) // If we press the brake, we can smoothly turn the car back. / Если мы жмем тормоз, плавно поворачиваем машинку назад.
         {
-            _rb.AddTorque(_airTorque * Time.fixedDeltaTime, ForceMode2D.Impulse);
+            _rigidbody.AddTorque(_airTorque * Time.fixedDeltaTime, ForceMode2D.Impulse);
         }
     }
 
@@ -129,7 +145,7 @@ public class CarController : MonoBehaviour
         if (_flipTimer < _flipCheckInterval) return;
         _flipTimer = 0f;
 
-        bool isStopped = _rb.linearVelocity.magnitude / 3.6f < _speedThreshold;
+        bool isStopped = _rigidbody.linearVelocity.magnitude / 3.6f < _speedThreshold;
 
         bool isUpsideDown = Vector2.Dot(transform.up, Vector2.up) < _upDotThreshold;
 
@@ -141,7 +157,7 @@ public class CarController : MonoBehaviour
 
     private void Move()
     {
-        float currentSpeedKmh = _rb.linearVelocity.magnitude * 3.6f;
+        float currentSpeedKmh = _rigidbody.linearVelocity.magnitude * 3.6f;
         OnSpeedChanged?.Invoke(currentSpeedKmh);
 
         if (!_groundCheck.IsGround) return;
@@ -152,14 +168,14 @@ public class CarController : MonoBehaviour
         _frontSuspensionWheelJoint.useMotor = false;
         _backSuspensionWheelJoint.useMotor = false;
 
-        if (_isWorkingEngine && !_isBraking && currentSpeedKmh < _motorMaxSpeed) // If the engine is running, push the car forward. / Если двигатель работает, толкаем машинку вперед.
+        if (_isWorkingEngine && !_isBraking && currentSpeedKmh < _motorMaximumSpeed) // If the engine is running, push the car forward. / Если двигатель работает, толкаем машинку вперед.
         {
             if (_frontWheel)
             {
                 _frontSuspensionWheelJoint.useMotor = true;
 
-                motorFront.motorSpeed = -_motorMaxSpeed * 100f;
-                motorFront.maxMotorTorque = 500f;
+                motorFront.motorSpeed = -_motorMaximumSpeed * 100f;
+                motorFront.maxMotorTorque = _maximumMotorTorque;
 
                 _frontSuspensionWheelJoint.motor = motorFront;
             }
@@ -167,8 +183,8 @@ public class CarController : MonoBehaviour
             {
                 _backSuspensionWheelJoint.useMotor = true;
 
-                motorBack.motorSpeed = -_motorMaxSpeed * 100f;
-                motorBack.maxMotorTorque = 500f;
+                motorBack.motorSpeed = -_motorMaximumSpeed * 100f;
+                motorBack.maxMotorTorque = _maximumMotorTorque;
 
                 _backSuspensionWheelJoint.motor = motorBack;
             }

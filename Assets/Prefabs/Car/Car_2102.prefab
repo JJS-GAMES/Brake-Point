@@ -102,7 +102,7 @@ CircleCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: c66610a334f476442bc39f5d9735e00d, type: 2}
+  m_Material: {fileID: 6200000, guid: 04ac6152f29dca747bf71fc2ae02bb38, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -144,7 +144,7 @@ Rigidbody2D:
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 6200000, guid: c66610a334f476442bc39f5d9735e00d, type: 2}
+  m_Material: {fileID: 6200000, guid: 04ac6152f29dca747bf71fc2ae02bb38, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -10156,7 +10156,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5103805921916859953}
   - component: {fileID: 8833688443604258200}
-  - component: {fileID: 8631480371054064175}
   m_Layer: 6
   m_Name: Car_2102
   m_TagString: Untagged
@@ -10193,21 +10192,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _carSettings: {fileID: 11400000, guid: 6586970fa0be5a04ebfccd8250823249, type: 2}
-  _cameraChase2D: {fileID: 8631480371054064175}
   _target: {fileID: 7116460128008839793}
   _groundCheck: {fileID: 7185739060093563962}
---- !u!114 &8631480371054064175
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6998381053576339227}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 573674aa341441747ae89e4a860d3e7e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7303459100923128799
 GameObject:
   m_ObjectHideFlags: 0
@@ -10343,7 +10329,7 @@ CircleCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: c66610a334f476442bc39f5d9735e00d, type: 2}
+  m_Material: {fileID: 6200000, guid: 04ac6152f29dca747bf71fc2ae02bb38, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -10385,7 +10371,7 @@ Rigidbody2D:
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 6200000, guid: c66610a334f476442bc39f5d9735e00d, type: 2}
+  m_Material: {fileID: 6200000, guid: 04ac6152f29dca747bf71fc2ae02bb38, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
