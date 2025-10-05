@@ -12,9 +12,7 @@ public class CarController : MonoBehaviour
 
     private float _mass = 10f;
 
-    private float _engineMaxSpeed = 10f;
-    private float _coastMaxSpeed = 10f;
-    private float _acceleration = 10f;
+    private float _motorMaxSpeed = 10f;
 
     private float _flipCheckInterval = 0.2f;
     private float _speedThreshold = 0.1f;
@@ -24,8 +22,9 @@ public class CarController : MonoBehaviour
     private float _brakeForce = 2f;
 
     private float _airTorque = 20f;
-    private float _airSlowEffect = 5f;
-    private float _airBoostEffect = 12f;
+
+    private bool _frontWheel = false;
+    private bool _backWheel = true;
 
     private bool _isWorkingEngine;
     private bool _isBraking;
@@ -40,25 +39,26 @@ public class CarController : MonoBehaviour
     private Rigidbody2D _rb;
 
     public Rigidbody2D GetRb => _rb;
-    public bool GetIsWorkingEngine => _isWorkingEngine;
-    public bool GetIsBraking => _isBraking;
+    public bool IsWorkingEngine => _isWorkingEngine;
+    public bool IsBraking => _isBraking;
 
     public event Action<float> OnSpeedChanged;
     public event Action OnCarDefeated;
 
-    public void Init(GroundCheck groundCheck, float mass, float engineMaxSpeed, float coastMaxSpeed, float acceleration, float flipCheckInterval, float speedThreshold, float upDotThreshold, float brakeForce, float airTorque, float airSlowEffect, float airBoostEffect, float frontSuspensionStiffness, float backSuspensionStiffness)
+    public void Init(GroundCheck groundCheck, bool frontWheel, bool backWheel, float mass, float motorMaxSpeed, float flipCheckInterval, float speedThreshold, float upDotThreshold, float brakeForce, float airTorque, float frontSuspensionStiffness, float backSuspensionStiffness)
     {
         _rb = GetComponent<Rigidbody2D>();
 
         // Main Settings
         // Основные настройки
 
+        _frontWheel = frontWheel;
+        _backWheel = backWheel;
+
         _mass = mass;
         _rb.mass = _mass;
 
-        _engineMaxSpeed = engineMaxSpeed;
-        _coastMaxSpeed = coastMaxSpeed;
-        _acceleration = acceleration;
+        _motorMaxSpeed = motorMaxSpeed;
         _groundCheck = groundCheck;
 
         _flipCheckInterval = flipCheckInterval;
@@ -71,8 +71,6 @@ public class CarController : MonoBehaviour
         // Скорость в воздухе
 
         _airTorque = airTorque;
-        _airSlowEffect = airSlowEffect;
-        _airBoostEffect = airBoostEffect;
 
         // Suspension Settings
         // Настройки подвески
@@ -86,6 +84,8 @@ public class CarController : MonoBehaviour
         backSuspensionSettings.frequency = backSuspensionStiffness;
         _backSuspensionWheelJoint.suspension = backSuspensionSettings;
         _backSuspensionWheelJoint.anchor = _backSuspensionWheelJoint.connectedBody.transform.parent.localPosition;
+
+        _rb.centerOfMass = new Vector2(0, -0.2f);
     }
     private void Update()
     {
@@ -121,20 +121,6 @@ public class CarController : MonoBehaviour
         {
             _rb.AddTorque(_airTorque * Time.fixedDeltaTime, ForceMode2D.Impulse);
         }
-
-        float tilt = transform.up.y;
-        Vector2 newVelocity = _rb.linearVelocity;
-
-        float airDrag = 2f;
-        if (Mathf.Abs(newVelocity.x) > 0.01f)
-            newVelocity.x -= Mathf.Sign(newVelocity.x) * airDrag * Time.fixedDeltaTime;
-
-        if (tilt > 0f)
-            newVelocity.x += -tilt * _airSlowEffect * Time.fixedDeltaTime;
-        else if (tilt < 0f)
-            newVelocity.x += -tilt * _airBoostEffect * Time.fixedDeltaTime;
-
-        _rb.linearVelocity = newVelocity;
     }
 
     private void CheckForFlipAndStop()
@@ -143,7 +129,7 @@ public class CarController : MonoBehaviour
         if (_flipTimer < _flipCheckInterval) return;
         _flipTimer = 0f;
 
-        bool isStopped = _rb.linearVelocity.magnitude < _speedThreshold;
+        bool isStopped = _rb.linearVelocity.magnitude / 3.6f < _speedThreshold;
 
         bool isUpsideDown = Vector2.Dot(transform.up, Vector2.up) < _upDotThreshold;
 
@@ -155,37 +141,64 @@ public class CarController : MonoBehaviour
 
     private void Move()
     {
-        OnSpeedChanged?.Invoke(_rb.linearVelocity.magnitude);
+        float currentSpeedKmh = _rb.linearVelocity.magnitude * 3.6f;
+        OnSpeedChanged?.Invoke(currentSpeedKmh);
 
         if (!_groundCheck.IsGround) return;
 
-        Vector2 velocity = _rb.linearVelocity;
+        var motorFront = _frontSuspensionWheelJoint.motor;
+        var motorBack = _backSuspensionWheelJoint.motor;
 
-        if (_isWorkingEngine && !_isBraking) // If the engine is running, push the car forward. / Если двигатель работает, толкаем машинку вперед.
+        _frontSuspensionWheelJoint.useMotor = false;
+        _backSuspensionWheelJoint.useMotor = false;
+
+        if (_isWorkingEngine && !_isBraking && currentSpeedKmh < _motorMaxSpeed) // If the engine is running, push the car forward. / Если двигатель работает, толкаем машинку вперед.
         {
-            float targetX = transform.right.x * _engineMaxSpeed;
-
-            if (Mathf.Abs(velocity.x) < Mathf.Abs(targetX))
+            if (_frontWheel)
             {
-                velocity.x += Mathf.Sign(targetX) * _acceleration * Time.fixedDeltaTime;
-            }
+                _frontSuspensionWheelJoint.useMotor = true;
 
-            velocity.x = Mathf.Clamp(velocity.x, -_engineMaxSpeed, _engineMaxSpeed);
+                motorFront.motorSpeed = -_motorMaxSpeed * 100f;
+                motorFront.maxMotorTorque = 500f;
+
+                _frontSuspensionWheelJoint.motor = motorFront;
+            }
+            if (_backWheel)
+            {
+                _backSuspensionWheelJoint.useMotor = true;
+
+                motorBack.motorSpeed = -_motorMaxSpeed * 100f;
+                motorBack.maxMotorTorque = 500f;
+
+                _backSuspensionWheelJoint.motor = motorBack;
+            }
         }
         else if (_isBraking) // If we press the brake, we smoothly stop the car. / Если мы жмем тормоз, плавно останавливаем машинку.
         {
-            velocity.x = Mathf.MoveTowards(velocity.x, 0f, _acceleration * _brakeForce * Time.fixedDeltaTime);
+            if (_frontWheel)
+            {
+                _frontSuspensionWheelJoint.useMotor = true;
 
-            if (Mathf.Abs(velocity.x) < 0.05f)
-                velocity.x = 0f;
+                motorFront.motorSpeed = 0;
+                motorFront.maxMotorTorque = _brakeForce * 100f;
+
+                _frontSuspensionWheelJoint.motor = motorFront;
+            }
+            if (_backWheel)
+            {
+                _backSuspensionWheelJoint.useMotor = true;
+
+                motorBack.motorSpeed = 0;
+                motorBack.maxMotorTorque = _brakeForce * 100f;
+
+                _backSuspensionWheelJoint.motor = motorBack;
+            }
         }
-        else // If the engine is not running, the car is traveling by inertia. / Если двигатель не работает, машинка едет по инерции.
+        else
         {
-            float max = _coastMaxSpeed;
-            velocity.x = Mathf.MoveTowards(velocity.x, Mathf.Clamp(velocity.x, -max, max), _acceleration * Time.fixedDeltaTime);
+            _frontSuspensionWheelJoint.useMotor = false;
+            _backSuspensionWheelJoint.useMotor = false;
         }
-
-        _rb.linearVelocity = velocity;
     }
 
     public void ToggleWorkingEngine(bool toggle) => _isWorkingEngine = toggle;

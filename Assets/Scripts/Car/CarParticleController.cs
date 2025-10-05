@@ -8,7 +8,6 @@ public class CarParticleController : MonoBehaviour
 
     private float _decaySpeed = 20f;
     private float _restoreSpeed = 10f;
-    private float _minSpeedToEmit = 0.1f;
 
     private CarController _carController;
     private GroundCheck _groundCheck;
@@ -29,19 +28,24 @@ public class CarParticleController : MonoBehaviour
 
     private float _updateTimer = 0f;
 
+    private bool _frontWheel = false;
+    private bool _backWheel = true;
+
     private bool _frontWasPlaying = false;
     private bool _backWasPlaying = false;
     private bool _frontEmissionEnabled = false;
     private bool _backEmissionEnabled = false;
 
-    public void Init(CarController carController, GroundCheck groundCheck, float decaySpeed, float restoreSpeed, float minSpeedToEmit)
+    public void Init(CarController carController, GroundCheck groundCheck, bool frontWheel, bool backWheel, float decaySpeed, float restoreSpeed, float minSpeedToEmit)
     {
         _carController = carController;
         _groundCheck = groundCheck;
 
+        _frontWheel = frontWheel;
+        _backWheel = backWheel;
+
         _decaySpeed = decaySpeed;
         _restoreSpeed = restoreSpeed;
-        _minSpeedToEmit = minSpeedToEmit;
 
         CacheDefaultRates();
     }
@@ -53,7 +57,7 @@ public class CarParticleController : MonoBehaviour
 
     private void CacheDefaultRates()
     {
-        if (_frontWheelParticleSystem != null)
+        if (_frontWheelParticleSystem != null && _frontWheel)
         {
             _frontEmission = _frontWheelParticleSystem.emission;
             _frontDefaultRate = _frontEmission.rateOverTime.constant;
@@ -61,8 +65,9 @@ public class CarParticleController : MonoBehaviour
             _frontWasPlaying = _frontWheelParticleSystem.isPlaying;
             _frontEmissionEnabled = _frontEmission.enabled;
         }
+        else _frontWheelParticleSystem?.gameObject.SetActive(false);
 
-        if (_backWheelParticleSystem != null)
+        if (_backWheelParticleSystem != null && _backWheel)
         {
             _backEmission = _backWheelParticleSystem.emission;
             _backDefaultRate = _backEmission.rateOverTime.constant;
@@ -70,6 +75,7 @@ public class CarParticleController : MonoBehaviour
             _backWasPlaying = _backWheelParticleSystem.isPlaying;
             _backEmissionEnabled = _backEmission.enabled;
         }
+        else _backWheelParticleSystem?.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -85,8 +91,14 @@ public class CarParticleController : MonoBehaviour
     {
         if (_carController == null || _groundCheck == null)
         {
-            StopAndDisable(_frontWheelParticleSystem, ref _frontEmission, ref _frontCurrentRate, ref _frontWasPlaying, ref _frontEmissionEnabled);
-            StopAndDisable(_backWheelParticleSystem, ref _backEmission, ref _backCurrentRate, ref _backWasPlaying, ref _backEmissionEnabled);
+            if (_frontWheelParticleSystem != null && _frontWheel)
+            {
+                StopAndDisable(_frontWheelParticleSystem, ref _frontEmission, ref _frontCurrentRate, ref _frontWasPlaying, ref _frontEmissionEnabled);
+            }
+            if (_backWheelParticleSystem != null && _backWheel)
+            {
+                StopAndDisable(_backWheelParticleSystem, ref _backEmission, ref _backCurrentRate, ref _backWasPlaying, ref _backEmissionEnabled);
+            }
             return;
         }
 
@@ -99,29 +111,46 @@ public class CarParticleController : MonoBehaviour
 
         bool grounded = _groundCheck.IsGround;
 
-        if (grounded && carSpeed > _minSpeedToEmit)
+        if (grounded && _carController.IsWorkingEngine)
         {
-            float targetFront = _frontDefaultRate;
-            float targetBack = _backDefaultRate;
+            if (_frontWheelParticleSystem != null && _frontWheel)
+            {
+                float targetFront = _frontDefaultRate;
+                float nextFront = Mathf.MoveTowards(_frontCurrentRate, targetFront, _restoreSpeed * Time.deltaTime / _updateInterval);
 
-            float nextFront = Mathf.MoveTowards(_frontCurrentRate, targetFront, _restoreSpeed * Time.deltaTime / _updateInterval);
-            float nextBack = Mathf.MoveTowards(_backCurrentRate, targetBack, _restoreSpeed * Time.deltaTime / _updateInterval);
+                ApplyEmission(_frontWheelParticleSystem, ref _frontEmission, ref _frontCurrentRate, nextFront, ref _frontWasPlaying, ref _frontEmissionEnabled);
+            }
+            if (_backWheelParticleSystem != null && _backWheel)
+            {
+                float targetBack = _backDefaultRate;
+                float nextBack = Mathf.MoveTowards(_backCurrentRate, targetBack, _restoreSpeed * Time.deltaTime / _updateInterval);
 
-            ApplyEmission(_frontWheelParticleSystem, ref _frontEmission, ref _frontCurrentRate, nextFront, ref _frontWasPlaying, ref _frontEmissionEnabled);
-            ApplyEmission(_backWheelParticleSystem, ref _backEmission, ref _backCurrentRate, nextBack, ref _backWasPlaying, ref _backEmissionEnabled);
+                ApplyEmission(_backWheelParticleSystem, ref _backEmission, ref _backCurrentRate, nextBack, ref _backWasPlaying, ref _backEmissionEnabled);
+            }
         }
-        else if (!grounded && carSpeed > _minSpeedToEmit)
+        else if (!grounded)
         {
-            float nextFront = Mathf.MoveTowards(_frontCurrentRate, 0f, _decaySpeed * Time.deltaTime / _updateInterval);
-            float nextBack = Mathf.MoveTowards(_backCurrentRate, 0f, _decaySpeed * Time.deltaTime / _updateInterval);
-
-            ApplyEmission(_frontWheelParticleSystem, ref _frontEmission, ref _frontCurrentRate, nextFront, ref _frontWasPlaying, ref _frontEmissionEnabled);
-            ApplyEmission(_backWheelParticleSystem, ref _backEmission, ref _backCurrentRate, nextBack, ref _backWasPlaying, ref _backEmissionEnabled);
+            if (_frontWheelParticleSystem != null && _frontWheel)
+            {
+                float nextFront = Mathf.MoveTowards(_frontCurrentRate, 0f, _decaySpeed * Time.deltaTime / _updateInterval);
+                ApplyEmission(_frontWheelParticleSystem, ref _frontEmission, ref _frontCurrentRate, nextFront, ref _frontWasPlaying, ref _frontEmissionEnabled);
+            }
+            if (_backWheelParticleSystem != null && _backWheel)
+            {
+                float nextBack = Mathf.MoveTowards(_backCurrentRate, 0f, _decaySpeed * Time.deltaTime / _updateInterval);
+                ApplyEmission(_backWheelParticleSystem, ref _backEmission, ref _backCurrentRate, nextBack, ref _backWasPlaying, ref _backEmissionEnabled);
+            }
         }
         else
         {
-            StopAndDisable(_frontWheelParticleSystem, ref _frontEmission, ref _frontCurrentRate, ref _frontWasPlaying, ref _frontEmissionEnabled);
-            StopAndDisable(_backWheelParticleSystem, ref _backEmission, ref _backCurrentRate, ref _backWasPlaying, ref _backEmissionEnabled);
+            if (_frontWheelParticleSystem != null && _frontWheel)
+            {
+                StopAndDisable(_frontWheelParticleSystem, ref _frontEmission, ref _frontCurrentRate, ref _frontWasPlaying, ref _frontEmissionEnabled);
+            }
+            if (_backWheelParticleSystem != null && _backWheel)
+            {
+                StopAndDisable(_backWheelParticleSystem, ref _backEmission, ref _backCurrentRate, ref _backWasPlaying, ref _backEmissionEnabled);
+            }
         }
     }
 

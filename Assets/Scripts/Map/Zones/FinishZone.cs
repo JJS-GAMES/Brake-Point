@@ -27,6 +27,7 @@ public class FinishZone : MonoBehaviour
         {
             if (Mathf.RoundToInt(_car.GetCarController.GetRb.linearVelocity.magnitude) <= _finishSpeedThreshold)
             {
+                _car.GetCarController.enabled = false;
                 _uiManager?.ToggleFinishUI(true);
             }
         }

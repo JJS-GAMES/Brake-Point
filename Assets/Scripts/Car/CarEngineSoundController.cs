@@ -1,4 +1,4 @@
-using UnityEngine;
+п»їusing UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
 public class CarEngineSoundController : MonoBehaviour
@@ -15,7 +15,7 @@ public class CarEngineSoundController : MonoBehaviour
     private Car _carScript;
     public void Init(Car carScript, AudioClip engineSoundClip, float minPitch, float groundMaxPitch, float airMaxPitch, float groundPitchSmooth, float airPitchSmooth)
     {
-        // Инициализация полей / Fields Initialization
+        // РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РїРѕР»РµР№ / Fields Initialization
 
         _carScript = carScript;
 
@@ -28,7 +28,7 @@ public class CarEngineSoundController : MonoBehaviour
         _groundPitchSmooth = groundPitchSmooth;
         _airPitchSmooth = airPitchSmooth;
 
-        // Инициализация проигрывателя / Audio Source Initialization
+        // РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РїСЂРѕРёРіСЂС‹РІР°С‚РµР»СЏ / Audio Source Initialization
 
         if(_audioSource == null) _audioSource = GetComponent<AudioSource>();
 
@@ -47,15 +47,17 @@ public class CarEngineSoundController : MonoBehaviour
     private void UpdateEngineSound()
     {
         float speed = _carScript.GetCarController.GetRb.linearVelocity.magnitude;
-        float maxSpeed = _carScript.GetCarSettings.EngineMaxSpeed;
+        float maxSpeed = _carScript.GetCarSettings.MotorMaxSpeed;
         float t = Mathf.Clamp01(speed / maxSpeed);
 
         float targetPitch;
 
-        if (_carScript.GetCarController.GetIsWorkingEngine)
+
+        if (_carScript.GetCarController.IsWorkingEngine)
         {
             if (_carScript.GetGroundCheck.IsGround)
             {
+                float currentGear = _groundMaxPitch / 4;
                 targetPitch = Mathf.Lerp(_minPitch, _groundMaxPitch, t);
             }
             else

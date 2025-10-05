@@ -14,16 +14,17 @@ public class CarSettings : ScriptableObject
 
     [Header("Main Settings / Основные настройки")]
 
-    [Tooltip("Car mass (kg) / Масса машины (кг)")]
+    [Tooltip("Front-wheel drive / Передний привод колес")]
+    public bool FrontWheel = false;
+    [Tooltip("Back-wheel drive / Задний привод колес")]
+    public bool BackWheel = true;
+
+    [Space, Tooltip("Car mass (kg) / Масса машины (кг)")]
     public float Mass = 10f;
-    [Space, Tooltip("Engine Max Speed (km/h) / Максимальная скорость при работающем двигателе (км/ч)")]
-    public float EngineMaxSpeed = 10f;
-    [Tooltip("Coast Max Speed (km/h) / Максимальная скорость машинки по инерции (км/ч)")]
-    public float CoastMaxSpeed = 5f;
-    [Tooltip("Acceleration (higher value = faster speed gain) / Ускорение (чем выше значение, тем быстрее разгон)")]
-    public float Acceleration = 10f;
-    [Space, Range(0.1f, 10f), Tooltip("Brake force applied when braking (higher = stops faster) / Сила торможения при нажатии на тормоз (чем выше, тем быстрее останавливается машина)")]
-    public float BrakeForce = 2f;
+    [Tooltip("Engine Max Speed (km/h) / Максимальная скорость при работающем двигателе (км/ч)")]
+    public float MotorMaxSpeed = 10f;
+    [Range(0.1f, 10f), Tooltip("Brake force applied when braking (higher = stops faster) / Сила торможения при нажатии на тормоз (чем выше, тем быстрее останавливается машина)")]
+    public float BreakForce = 2f;
 
     [Space, Header("----------------------------"), Space]
 
@@ -49,17 +50,13 @@ public class CarSettings : ScriptableObject
 
     [Range(5f, 100f), Tooltip("The force of rotation of the machine in the air / Сила вращения машины в воздухе")]
     public float AirTorque = 20f;
-    [Tooltip("Deceleration of speed during ascent (when the car is flying up) / Замедление скорости при подъёме (когда машина летит вверх)")]
-    public float AirSlowEffect = 3f;
-    [Tooltip("Acceleration of speed during descent (when the car is flying down) / Ускорение скорости при спуске (когда машина летит вниз)")]
-    public float AirBoostEffect = 7f;
 
     [Space, Header("----------------------------"), Space]
 
     [Space, Header("Suspension Settings / Настройки подвески")]
-    [Range(3f, 12f), Tooltip("Stiffness of the front suspension (range 3-12) / Жесткость передней подвески (диапазон 3–12)")]
+    [Range(3f, 20f), Tooltip("Stiffness of the front suspension (range 3-20) / Жесткость передней подвески (диапазон 3–20)")]
     public float FrontSuspensionStiffness = 8f;
-    [Range(3f, 12f), Tooltip("Stiffness of the back suspension (range 3-12) / Жесткость задней подвески (диапазон 3–12)")]
+    [Range(3f, 20f), Tooltip("Stiffness of the back suspension (range 3-12) / Жесткость задней подвески (диапазон 3–12)")]
     public float BackSuspensionStiffness = 8f;
 
     [Space, Header("----------------------------"), Space]

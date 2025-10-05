@@ -13,28 +13,26 @@ MonoBehaviour:
   m_Name: 2102_Settings
   m_EditorClassIdentifier: 
   Smooth: 6
-  Offset: {x: 4, y: 1, z: -20}
+  Offset: {x: 4, y: 1, z: -10}
+  FrontWheel: 0
+  BackWheel: 1
   Mass: 10
-  EngineMaxSpeed: 25
-  CoastMaxSpeed: 10
-  Acceleration: 8
-  BrakeForce: 2
+  MotorMaxSpeed: 135
+  BreakForce: 2
   FlipCheckInterval: 0.241
   SpeedThreshold: 0.1
   UpDotThreshold: -0.8
   CarPhysicsMaterial: {fileID: 6200000, guid: d0e6e03167fe7984cafc62378b1042e2, type: 2}
   Friction: 0.6
   AirTorque: 10
-  AirSlowEffect: 3
-  AirBoostEffect: 7
-  FrontSuspensionStiffness: 11
-  BackSuspensionStiffness: 11
+  FrontSuspensionStiffness: 12
+  BackSuspensionStiffness: 10
   DecaySpeed: 20
   RestoreSpeed: 10
   MinSpeedToEmit: 5
   EngineSoundClip: {fileID: 8300000, guid: c51eb7b42bb0da8458ec10d632933cd0, type: 3}
   MinPitch: 0.5
-  GroundMaxPitch: 2
+  GroundMaxPitch: 2.5
   AirMaxPitch: 2.5
   GroundPitchSmooth: 5
   AirPitchSmooth: 2.5
