@@ -22,7 +22,10 @@ public class CarSettings : ScriptableObject
     [Space, Tooltip("Car mass (kg) / Масса машины (кг)")]
     public float Mass = 10f;
     [Tooltip("Engine Max Speed (km/h) / Максимальная скорость при работающем двигателе (км/ч)")]
-    public float MotorMaxSpeed = 10f;
+    public float MotorMaximumSpeed = 10f;
+    [Range(1, 100), Tooltip("Maximum motor torque (affects acceleration) / Максимальный крутящий момент двигателя (влияет на ускорение)")]
+    public float MaximumMotorTorque = 20f;
+
     [Range(0.1f, 10f), Tooltip("Brake force applied when braking (higher = stops faster) / Сила торможения при нажатии на тормоз (чем выше, тем быстрее останавливается машина)")]
     public float BreakForce = 2f;
 
@@ -54,7 +57,12 @@ public class CarSettings : ScriptableObject
     [Space, Header("----------------------------"), Space]
 
     [Space, Header("Suspension Settings / Настройки подвески")]
-    [Range(3f, 20f), Tooltip("Stiffness of the front suspension (range 3-20) / Жесткость передней подвески (диапазон 3–20)")]
+    [Range(0.8f, 1.2f), Tooltip("Front wheel traction multiplier (adjusts grip/slide) / Множитель сцепления переднего колеса (регулирует прилипание/скольжение)")]
+    public float FrontWheelTraction = 1f;
+    [Range(0.8f, 1.2f), Tooltip("Back wheel traction multiplier (adjusts grip/slide) / Множитель сцепления заднего колеса (регулирует прилипание/скольжение)")]
+    public float BackWheelTraction = 1f;
+
+    [Space, Range(3f, 20f), Tooltip("Stiffness of the front suspension (range 3-20) / Жесткость передней подвески (диапазон 3–20)")]
     public float FrontSuspensionStiffness = 8f;
     [Range(3f, 20f), Tooltip("Stiffness of the back suspension (range 3-12) / Жесткость задней подвески (диапазон 3–12)")]
     public float BackSuspensionStiffness = 8f;

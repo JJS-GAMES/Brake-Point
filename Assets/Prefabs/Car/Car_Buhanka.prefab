@@ -9749,7 +9749,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _carSettings: {fileID: 11400000, guid: 969ef862987e07b4297445b8fc836d9a, type: 2}
-  _cameraChase2D: {fileID: 0}
   _target: {fileID: 3965676750135846235}
   _groundCheck: {fileID: 4231170653712127927}
 --- !u!1 &3169773199761184966
@@ -14538,7 +14537,7 @@ CircleCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 04ac6152f29dca747bf71fc2ae02bb38, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -14580,7 +14579,7 @@ Rigidbody2D:
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 04ac6152f29dca747bf71fc2ae02bb38, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -15161,7 +15160,7 @@ CircleCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 04ac6152f29dca747bf71fc2ae02bb38, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -15203,7 +15202,7 @@ Rigidbody2D:
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 04ac6152f29dca747bf71fc2ae02bb38, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

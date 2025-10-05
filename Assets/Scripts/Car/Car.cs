@@ -8,7 +8,7 @@ public class Car : MonoBehaviour
 
     [Header("Camera Settings / Настройки камеры")]
 
-    [SerializeField] private CameraChase2D _cameraChase2D;
+    private CameraChase2D _cameraChase2D;
     [SerializeField] private Transform _target;
     public Transform Target => _target;
 
@@ -38,14 +38,17 @@ public class Car : MonoBehaviour
             _carSettings.FrontWheel,
             _carSettings.BackWheel,
             _carSettings.Mass,
-            _carSettings.MotorMaxSpeed,
+            _carSettings.MotorMaximumSpeed,
+            _carSettings.MaximumMotorTorque,
             _carSettings.FlipCheckInterval,
             _carSettings.SpeedThreshold,
             _carSettings.UpDotThreshold,
             _carSettings.BreakForce,
             _carSettings.AirTorque,
             _carSettings.FrontSuspensionStiffness,
-            _carSettings.BackSuspensionStiffness
+            _carSettings.BackSuspensionStiffness,
+            _carSettings.FrontWheelTraction,
+            _carSettings.BackWheelTraction
             );
 
         _cameraChase2D = camera.GetComponent<CameraChase2D>();  
