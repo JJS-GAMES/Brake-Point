@@ -4588,10 +4588,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1184628608}
     m_Modifications:
-    - target: {fileID: 7475665683122827126, guid: 91dd66132657db0418aa70264397e4a2, type: 3}
-      propertyPath: _speedReductionPercent
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 7991531646470227085, guid: 91dd66132657db0418aa70264397e4a2, type: 3}
       propertyPath: m_Name
       value: Dirt (2)
@@ -5063,10 +5059,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1184628608}
     m_Modifications:
-    - target: {fileID: 7475665683122827126, guid: 91dd66132657db0418aa70264397e4a2, type: 3}
-      propertyPath: _speedReductionPercent
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 7991531646470227085, guid: 91dd66132657db0418aa70264397e4a2, type: 3}
       propertyPath: m_Name
       value: Dirt (1)
@@ -7260,10 +7252,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1184628608}
     m_Modifications:
-    - target: {fileID: 7475665683122827126, guid: 91dd66132657db0418aa70264397e4a2, type: 3}
-      propertyPath: _speedReductionPercent
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 7991531646470227085, guid: 91dd66132657db0418aa70264397e4a2, type: 3}
       propertyPath: m_Name
       value: Dirt

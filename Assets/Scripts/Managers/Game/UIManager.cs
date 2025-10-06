@@ -108,7 +108,7 @@ public class UIManager : MonoBehaviour
     public void CarUIInitialization(Car carScript)
     {
         _carScript = carScript;
-        var controller = _carScript.GetCarController;
+        var controller = _carScript.CarController;
 
         controller.OnSpeedChanged += UpdateSpeedText;
         controller.OnCarDefeated += ShowDefeatUI;
@@ -121,7 +121,7 @@ public class UIManager : MonoBehaviour
     public void UnsubscribeFromCar(Car car)
     {
         if (car == null) return;
-        var controller = car.GetCarController;
+        var controller = car.CarController;
         if (controller == null) return;
 
         controller.OnSpeedChanged -= UpdateSpeedText;
@@ -144,7 +144,7 @@ public class UIManager : MonoBehaviour
     }
     private void UpdateSpeedText(float speed)
     {
-        if (_carScript != null && _carScript.GetCarController != null)
+        if (_carScript != null && _carScript.CarController != null)
         {
             _carSpeed.text = $"Speed: {Mathf.RoundToInt(speed)} km/h";
         }

@@ -4,9 +4,6 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]
 public class Dirt : MonoBehaviour
 {
-    [SerializeField, Range(0f, 100f), Tooltip("Percentage of car speed deceleration / Процент замедления скорости машины")]
-    private float _speedReductionPercent = 1f;
-
     private BoxCollider2D _boxCollider;
 
     private void Awake()
@@ -24,7 +21,10 @@ public class Dirt : MonoBehaviour
         Rigidbody2D rb = car.GetRb;
         if (rb == null) return;
 
-        float factor = Mathf.Clamp01(1f - _speedReductionPercent / 100f);
+        float mudTraction = car.GetComponentInParent<Car>().CarSettings.MudTraction;
+
+        float factor = Mathf.Clamp01(mudTraction / 100f);
+
         rb.linearVelocity *= factor;
     }
 }

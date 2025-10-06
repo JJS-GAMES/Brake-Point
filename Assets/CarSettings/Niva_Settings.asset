@@ -16,6 +16,7 @@ MonoBehaviour:
   Offset: {x: 5, y: 1, z: -10}
   FrontWheel: 1
   BackWheel: 1
+  MudTraction: 95
   Mass: 10
   MotorMaximumSpeed: 120
   MaximumMotorTorque: 20

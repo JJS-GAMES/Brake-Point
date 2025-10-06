@@ -46,16 +46,16 @@ public class CarEngineSoundController : MonoBehaviour
 
     private void UpdateEngineSound()
     {
-        float speed = _carScript.GetCarController.GetRb.linearVelocity.magnitude;
-        float maxSpeed = _carScript.GetCarSettings.MotorMaximumSpeed;
+        float speed = _carScript.CarController.GetRb.linearVelocity.magnitude;
+        float maxSpeed = _carScript.CarSettings.MotorMaximumSpeed;
         float t = Mathf.Clamp01(speed / maxSpeed);
 
         float targetPitch;
 
 
-        if (_carScript.GetCarController.IsWorkingEngine)
+        if (_carScript.CarController.IsWorkingEngine)
         {
-            if (_carScript.GetGroundCheck.IsGround)
+            if (_carScript.GroundCheck.IsGround)
             {
                 float currentGear = _groundMaxPitch / 4;
                 targetPitch = Mathf.Lerp(_minPitch, _groundMaxPitch, t);
@@ -70,7 +70,7 @@ public class CarEngineSoundController : MonoBehaviour
             targetPitch = _minPitch;
         }
 
-        float smooth = _carScript.GetGroundCheck.IsGround ? _groundPitchSmooth : _airPitchSmooth;
+        float smooth = _carScript.GroundCheck.IsGround ? _groundPitchSmooth : _airPitchSmooth;
 
         _audioSource.pitch = Mathf.Lerp(_audioSource.pitch, targetPitch, Time.deltaTime * smooth);
     }

@@ -19,6 +19,9 @@ public class CarSettings : ScriptableObject
     [Tooltip("Back-wheel drive / Задний привод колес")]
     public bool BackWheel = true;
 
+    [Space, Range(0f, 100f), Tooltip("Traction multiplier in mud (higher = better performance) / Множитель сцепления в жидкой грязи (выше = лучше проходимость)")]
+    public float MudTraction = 95f;
+
     [Space, Tooltip("Car mass (kg) / Масса машины (кг)")]
     public float Mass = 10f;
     [Tooltip("Engine Max Speed (km/h) / Максимальная скорость при работающем двигателе (км/ч)")]

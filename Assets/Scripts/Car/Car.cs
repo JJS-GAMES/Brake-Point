@@ -18,9 +18,9 @@ public class Car : MonoBehaviour
     private CarController _carController;
     private CarParticleController _carParticleController;
     private CarEngineSoundController _carEngineSoundController;
-    public GroundCheck GetGroundCheck => _groundCheck;
-    public CarController GetCarController => _carController;
-    public CarSettings GetCarSettings => _carSettings;
+    public GroundCheck GroundCheck => _groundCheck;
+    public CarController CarController => _carController;
+    public CarSettings CarSettings => _carSettings;
     public void Init(Camera camera)
     {
         // Physics Settings Initialization
