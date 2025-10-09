@@ -16,7 +16,7 @@ MonoBehaviour:
   Offset: {x: 5, y: 1, z: -10}
   FrontWheel: 1
   BackWheel: 1
-  MudTraction: 95
+  MudTraction: 16.2
   Mass: 10
   MotorMaximumSpeed: 120
   MaximumMotorTorque: 20
@@ -26,7 +26,7 @@ MonoBehaviour:
   UpDotThreshold: -0.8
   CarPhysicsMaterial: {fileID: 6200000, guid: d0e6e03167fe7984cafc62378b1042e2, type: 2}
   Friction: 0.6
-  AirTorque: 20
+  AirTorque: 5
   FrontWheelTraction: 1
   BackWheelTraction: 1
   FrontSuspensionStiffness: 12

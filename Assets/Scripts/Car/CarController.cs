@@ -42,6 +42,9 @@ public class CarController : MonoBehaviour
     private GroundCheck _groundCheck;
     private Rigidbody2D _rigidbody;
 
+    public WheelJoint2D FrontSuspensionWheelJoint;
+    public WheelJoint2D BackSuspensionWheelJoint;
+
     public Rigidbody2D GetRb => _rigidbody;
     public bool IsWorkingEngine => _isWorkingEngine;
     public bool IsBraking => _isBraking;

@@ -4,7 +4,6 @@ using UnityEngine;
 public class ParallaxManager : MonoBehaviour
 {
     [SerializeField] private ParallaxLayer[] _layers;
-    [SerializeField] private Transform _startTransform;
 
     private Camera _camera;
 
@@ -40,7 +39,7 @@ public class ParallaxManager : MonoBehaviour
 
             for (int i = 0; i < layer.Copies; i++)
             {
-                Vector3 pos = _startTransform.position + new Vector3(i * spriteWidth, 0, 0);
+                Vector3 pos = new Vector3(i * spriteWidth, 0, 0);
                 var obj = Instantiate(layer.Prefab, pos, Quaternion.identity);
                 obj.name = $"{layer.Prefab.name}_copy{i}";
 

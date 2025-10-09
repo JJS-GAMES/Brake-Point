@@ -4803,7 +4803,7 @@ ParticleSystemRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -14740,6 +14740,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _frontSuspensionWheelJoint: {fileID: 4217650077420380116}
   _backSuspensionWheelJoint: {fileID: 1549760328077751342}
+  FrontSuspensionWheelJoint: {fileID: 0}
+  BackSuspensionWheelJoint: {fileID: 0}
 --- !u!114 &3792070507787781717
 MonoBehaviour:
   m_ObjectHideFlags: 0
